@@ -8,6 +8,7 @@ import "./App.css";
 import LoginPage from "./Pages/LoginPage";
 import Home from "./Pages/Home";
 import { UserContext } from "./Contexts/UserContext";
+import InscriptionPage from "./Pages/InscriptionPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -24,6 +25,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/FlightFormPage" element={<FlightFormPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/inscription" element={<InscriptionPage />} />
         </Routes>
       </UserContext.Provider>
 

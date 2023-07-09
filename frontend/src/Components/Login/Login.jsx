@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import "./login.css";
 import { UserContext } from "../../Contexts/UserContext";
 
@@ -40,6 +41,9 @@ function Login() {
             required
           />
         </div>
+        <Link to="/Inscription" className="suggestInscription">
+          Pas encore inscrit ?{" "}
+        </Link>
         <button type="submit">Se connecter</button>
       </form>
     </div>
