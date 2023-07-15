@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IataCode } from "../../Services/IataCode";
+import { IataCode } from "../../services/IataCode";
 import "../../styles/CarbonEmissionForm.css";
 
 function CarbonEmissionForm() {

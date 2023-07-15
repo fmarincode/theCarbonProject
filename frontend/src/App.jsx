@@ -1,14 +1,14 @@
 import { useState, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
-import FlightFormPage from "./Pages/FlightFormPage";
+import FlightFormPage from "./pages/FlightFormPage";
 import Footer from "./Components/Footer/Footer";
 import Navbar from "./Components/Navbar/Navbar";
 import "./App.css";
 
-import LoginPage from "./Pages/LoginPage";
-import Home from "./Pages/Home";
+import LoginPage from "./pages/LoginPage";
+import Home from "./pages/Home";
 import { UserContext } from "./Contexts/UserContext";
-import InscriptionPage from "./Pages/InscriptionPage";
+import InscriptionPage from "./pages/InscriptionPage";
 
 function App() {
   const [user, setUser] = useState(null);
