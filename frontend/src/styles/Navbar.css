@@ -1,11 +1,9 @@
 nav {
   height: 50px;
-  background-color: #5ebbb6;
 }
 
 .liste {
   list-style-type: none;
-  background-color: #5ebbb6;
   height: 100%;
   display: flex;
   justify-content: center;

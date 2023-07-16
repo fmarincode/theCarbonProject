@@ -6,7 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import "./App.css";
 
 import LoginPage from "./pages/LoginPage";
-import Home from "./pages/Home";
+import HomePage from "./pages/HomePage";
 import { UserContext } from "./Contexts/UserContext";
 import InscriptionPage from "./pages/InscriptionPage";
 
@@ -22,7 +22,7 @@ function App() {
         <Navbar />
 
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<HomePage />} />
           <Route path="/FlightFormPage" element={<FlightFormPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/inscription" element={<InscriptionPage />} />
