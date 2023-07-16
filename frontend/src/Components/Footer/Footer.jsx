@@ -4,7 +4,7 @@ import "../../styles/Footer.css";
 function Footer() {
   return (
     <div className="containerFooter">
-      <p>Un footer</p>
+      <a href="https://docs.carboninterface.com/#/">Carbon Interface</a>
     </div>
   );
 }
