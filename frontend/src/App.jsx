@@ -1,9 +1,10 @@
 import { useState, useMemo } from "react";
 import { Route, Routes } from "react-router-dom";
 import FlightFormPage from "./pages/FlightFormPage";
-import Footer from "./Components/Footer/Footer";
-import Navbar from "./Components/Navbar/Navbar";
-import "./App.css";
+/* import Footer from "./Components/Footer/Footer"; */
+/* import Navbar from "./Components/Navbar/Navbar";
+ */
+import "./index.css";
 
 import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
@@ -17,9 +18,9 @@ function App() {
   const userContextValue = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   return (
-    <div className="App">
+    <div className="bg-[#6F7355]">
       <UserContext.Provider value={userContextValue}>
-        <Navbar />
+        {/* <Navbar /> */}
 
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -29,7 +30,7 @@ function App() {
         </Routes>
       </UserContext.Provider>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

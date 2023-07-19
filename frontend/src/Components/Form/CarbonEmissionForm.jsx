@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { IataCode } from "../../services/IataCode";
-import "../../styles/CarbonEmissionForm.css";
+import "./CarbonEmissionForm.css";
+
+const textInputStyle = {
+  width: "75%",
+  padding: "5px 10px",
+  border: "none",
+  borderBottom: "1px solid #645979",
+  outline: "none",
+  borderRadius: "5px",
+  fontSize: "1rem",
+};
 
 function CarbonEmissionForm() {
   const [userInputDepartureAirport, setUserInputDepartureAirport] =
@@ -158,88 +168,146 @@ function CarbonEmissionForm() {
   };
 
   return (
-    <div className="carbonEmissionFormContainer">
-      <h2>Calculateur d'émissions de carbone pour voyage en avion</h2>
+    <div className="flex items-center justify-center h-screen">
+      <div className="min-w-[65%] max-w-[65%] min-h-[50vh] bg-[#BEBF93] flex flex-col mx-auto my-auto rounded-lg">
+        <h2 className="text-[#D96E30] flex items-center font-bold justify-center text-3xl mb-10 mt-5 ">
+          [Prénom] Calcul l'emission de co2 de ton trajet en avion
+        </h2>
 
-      <form className="formCalculator">
-        <label htmlFor="departure-airport" className="labelDeparture">
-          Aéroport de départ:
-        </label>
-        <input
-          type="text"
-          value={userInputDepartureAirport}
-          onChange={handleDeparture}
-        />
+        <form className="flex flex-row justify-center mt-6">
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="departure-airport"
+              className="font-bold text-center mb-2"
+            >
+              Aéroport de départ
+            </label>
+            <input
+              type="search"
+              style={textInputStyle}
+              value={userInputDepartureAirport}
+              onChange={handleDeparture}
+            />
+          </div>
 
-        {userInputDepartureAirport !== "" && showSuggestDeparture && (
-          <ul className="displaySuggestDeparture">
-            {cityNameSuggest.map((city, index) => (
-              <li
-                role="presentation"
-                key={city[index]}
-                className="customListItem"
-                onClick={() => handleCityClickedDisplayDeparture(city)}
-              >
-                <p className="citySuggested">{city}</p>
-              </li>
-            ))}
-          </ul>
-        )}
+          {userInputDepartureAirport !== "" && showSuggestDeparture && (
+            <ul className="displaySuggestDeparture">
+              {cityNameSuggest.map((city, index) => (
+                <li
+                  role="presentation"
+                  key={city[index]}
+                  className="customListItem"
+                  onClick={() => handleCityClickedDisplayDeparture(city)}
+                >
+                  <p className="citySuggested">{city}</p>
+                </li>
+              ))}
+            </ul>
+          )}
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="arrival-airport"
+              className="font-bold text-center mb-2"
+            >
+              Aéroport d'arrivée{" "}
+            </label>
+            <input
+              type="search"
+              style={textInputStyle}
+              value={userInputArrivalAirport}
+              onChange={handleArrival}
+            />
+          </div>
 
-        <label htmlFor="arrival-airport" className="labelArrival">
-          Aéroport d'arrivée:{" "}
-        </label>
-        <input
-          type="text"
-          value={userInputArrivalAirport}
-          onChange={handleArrival}
-        />
+          {userInputArrivalAirport !== "" && showSuggestArrival && (
+            <ul className="displaySuggestArrival">
+              {cityNameSuggest.map((city, index) => (
+                <li
+                  role="presentation"
+                  key={city[index]}
+                  className="customListItem"
+                  onClick={() => handleCityClickedDisplayArrival(city)}
+                >
+                  <p className="citySuggested">{city}</p>
+                </li>
+              ))}
+            </ul>
+          )}
 
-        {userInputArrivalAirport !== "" && showSuggestArrival && (
-          <ul className="displaySuggestArrival">
-            {cityNameSuggest.map((city, index) => (
-              <li
-                role="presentation"
-                key={city[index]}
-                className="customListItem"
-                onClick={() => handleCityClickedDisplayArrival(city)}
-              >
-                <p className="citySuggested">{city}</p>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <br />
-        <br />
-
-        <label htmlFor="numb-passengers">Nombre de passagers: </label>
-        <input
-          type="number"
-          value={numbOfPassengers}
-          min="1"
-          max="1000"
-          onChange={handleNumbOfPassengers}
-        />
-        <br />
-        <br />
-
-        <button type="button" onClick={calculateCarbonEmission}>
-          Calculer
-        </button>
+          <br />
+          <br />
+          <div className="flex flex-col items-center">
+            <label
+              htmlFor="numb-passengers"
+              className="font-bold text-center mb-2"
+            >
+              Nombre de passagers{" "}
+            </label>
+            <input
+              type="number"
+              style={textInputStyle}
+              value={numbOfPassengers}
+              min="1"
+              max="1000"
+              onChange={handleNumbOfPassengers}
+            />
+          </div>
+          <br />
+          <br />
+        </form>
+        <div className="flex justify-center">
+          <button
+            type="button"
+            className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-32 mt-11"
+            onClick={calculateCarbonEmission}
+          >
+            Calculer
+          </button>
+        </div>
 
         {showResults && (
-          <>
-            <p>
-              Distance parcourue entre {userInputDepartureAirport} et{" "}
-              {userInputArrivalAirport} : {resultDistance} km
+          <div className="flex flex-col mt-8 justify-around">
+            <div className="flex justify-around">
+              <h3 className="font-bold text-4xl"> {resultDistance} km </h3>
+              <h3 className="font-bold text-4xl"> {resultCo2} kg</h3>
+              <h3 className="font-bold text-4xl">
+                {resultCo2 / numbOfPassengers} kg
+              </h3>
+            </div>
+            <div className="flex justify-around">
+              <h3 className="font-bold text-xl mt-8"> Distance parcourue</h3>
+              <h3 className="font-bold text-xl mt-8 relative left-10">
+                {" "}
+                Emission CO2 totale
+              </h3>
+              <h3 className="font-bold text-xl mt-8 relative left-5">
+                {" "}
+                Emission CO2 individuelle
+              </h3>
+            </div>
+            <p className="text-justify mt-8 pl-5 pr-5">
+              Ton voyage entre {userInputDepartureAirport} et{" "}
+              {userInputArrivalAirport} d'une distance de {resultDistance} km
+              émet {resultCo2} kg de dioxyde de carbone. Tu participes
+              activement à l'augmentation des températures de notre chère
+              planète Terre. Nous espérons que tu pourras trouver un autre moyen
+              de transport que l'avion pour te rendre à ta destination. En
+              attendant, tu peux sauvegarder ce trajet ainsi que les prochains
+              afin de les comparer et trouver le voyage qui te fera le moins
+              culpabiliser.
             </p>
-            <p>Emission CO2 : {resultCo2} kg</p>
-
-            <b>{usingApi} / 200 monthly API usage.</b>
-          </>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-40 mt-8 mb-8"
+              >
+                Sauvegarder
+              </button>
+            </div>
+            {/* <b>{usingApi} / 200 monthly API usage.</b> */}
+          </div>
         )}
-      </form>
+      </div>
     </div>
   );
 }

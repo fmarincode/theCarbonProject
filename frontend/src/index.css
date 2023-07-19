@@ -1,8 +1,6 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 @font-face {
   font-family: "Cerebri";
@@ -47,6 +45,4 @@
 
 body {
   font-family: "Cerebri", sans-serif;
-  font-weight: bold;
-  background-color: #ffec9998;
 }
