@@ -30,15 +30,14 @@ ENGINE = InnoDB;
 -- Table `carbon_db`.`flight`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `carbon_db`.`flight` (
-  `idtable1` INT NOT NULL,
+  `idflight` INT NOT NULL AUTO_INCREMENT,
   `departure` VARCHAR(100) NOT NULL,
   `arrival` VARCHAR(100) NOT NULL,
   `passengers` INT NOT NULL,
-  `individualKgEmission` INT NOT NULL,
   `totalKgEmission` INT NOT NULL,
   `kmDistance` INT NOT NULL,
   `user_iduser` INT NOT NULL,
-  PRIMARY KEY (`idtable1`, `user_iduser`),
+  PRIMARY KEY (`idflight`, `user_iduser`),
   INDEX `fk_flight_user_idx` (`user_iduser` ASC) VISIBLE,
   CONSTRAINT `fk_flight_user`
     FOREIGN KEY (`user_iduser`)

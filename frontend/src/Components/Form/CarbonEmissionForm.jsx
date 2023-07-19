@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { IataCode } from "../../services/IataCode";
 import "./CarbonEmissionForm.css";
+import UserContext from "../../contexts/UserContext";
 
 const textInputStyle = {
   width: "75%",
@@ -13,6 +16,10 @@ const textInputStyle = {
 };
 
 function CarbonEmissionForm() {
+  const navigate = useNavigate();
+
+  const { userId, firstname } = useContext(UserContext);
+
   const [userInputDepartureAirport, setUserInputDepartureAirport] =
     useState(""); // input value
   const [userInputArrivalAirport, setUserInputArrivalAirport] = useState(""); // input value
@@ -167,11 +174,34 @@ function CarbonEmissionForm() {
       .catch((error) => console.error(error));
   };
 
+  /* Send DATA to database */
+
+  const formTravel = {
+    departure: userInputDepartureAirport,
+    arrival: userInputArrivalAirport,
+    passengers: numbOfPassengers,
+    totalKgEmission: resultCo2,
+    kmDistance: resultDistance,
+    user_iduser: userId,
+  };
+
+  const saveFlight = (evt) => {
+    evt.preventDefault();
+    axios
+      .post(`${import.meta.env.VITE_BACKEND_URL}/flights`, formTravel)
+      .then(() => {
+        navigate("/profil");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div className="flex items-center justify-center h-screen">
       <div className="min-w-[65%] max-w-[65%] min-h-[50vh] bg-[#BEBF93] flex flex-col mx-auto my-auto rounded-lg">
         <h2 className="text-[#D96E30] flex items-center font-bold justify-center text-3xl mb-10 mt-5 ">
-          [Prénom], calcules l'émission de CO2 de ton trajet en avion
+          {firstname}, calcules l'émission de CO2 de ton trajet en avion
         </h2>
 
         <form className="flex flex-row justify-center mt-6">
@@ -300,6 +330,7 @@ function CarbonEmissionForm() {
               <button
                 type="submit"
                 className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-40 mt-8 mb-8"
+                onClick={saveFlight}
               >
                 Sauvegarder
               </button>

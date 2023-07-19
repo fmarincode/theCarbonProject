@@ -3,10 +3,11 @@ class AbstractManager {
     this.table = table;
   }
 
-  find(id) {
-    return this.database.query(`select * from  ${this.table} where id = ?`, [
-      id,
-    ]);
+  find(iduser) {
+    return this.database.query(
+      `select * from  ${this.table} where iduser = ?`,
+      [iduser]
+    );
   }
 
   findAll() {
