@@ -61,26 +61,28 @@ input[type="number"] {
 
 .displaySuggestDeparture {
   list-style: none;
-  width: 50%;
+  width: 15vw;
   border-radius: 5px;
   background-color: #fff;
   overflow-y: auto;
   height: auto;
   max-height: 15vh;
   position: absolute;
-  top: 86px;
+  bottom: 37vh;
+  left: 31%;
 }
 
 .displaySuggestArrival {
   list-style: none;
-  width: 50%;
+  width: 15vw;
   border-radius: 5px;
   background-color: #fff;
   overflow-y: auto;
   height: auto;
   max-height: 15vh;
   position: absolute;
-  top: 192px;
+  bottom: 37vh;
+  left: 45.75%;
 }
 
 .customListItem {
@@ -89,5 +91,5 @@ input[type="number"] {
 }
 
 .customListItem:hover {
-  background-color: #884451;
+  background-color: #d96e30;
 }
