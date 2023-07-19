@@ -10,6 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage";
 import { UserContext } from "./Contexts/UserContext";
 import InscriptionPage from "./pages/InscriptionPage";
+import UserProfil from "./pages/UserProfil";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -27,6 +28,7 @@ function App() {
           <Route path="/FlightFormPage" element={<FlightFormPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/inscription" element={<InscriptionPage />} />
+          <Route path="/profil" element={<UserProfil />} />
         </Routes>
       </UserContext.Provider>
 

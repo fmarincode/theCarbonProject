@@ -171,7 +171,7 @@ function CarbonEmissionForm() {
     <div className="flex items-center justify-center h-screen">
       <div className="min-w-[65%] max-w-[65%] min-h-[50vh] bg-[#BEBF93] flex flex-col mx-auto my-auto rounded-lg">
         <h2 className="text-[#D96E30] flex items-center font-bold justify-center text-3xl mb-10 mt-5 ">
-          [Prénom] Calcul l'emission de co2 de ton trajet en avion
+          [Prénom], calcules l'émission de CO2 de ton trajet en avion
         </h2>
 
         <form className="flex flex-row justify-center mt-6">
@@ -266,7 +266,7 @@ function CarbonEmissionForm() {
         </div>
 
         {showResults && (
-          <div className="flex flex-col mt-8 justify-around">
+          <div className="flex flex-col mt-8 justify-around bg-[#D9D7C5] rounded-md m-8 p-8">
             <div className="flex justify-around">
               <h3 className="font-bold text-4xl"> {resultDistance} km </h3>
               <h3 className="font-bold text-4xl"> {resultCo2} kg</h3>
@@ -276,7 +276,7 @@ function CarbonEmissionForm() {
             </div>
             <div className="flex justify-around">
               <h3 className="font-bold text-xl mt-8"> Distance parcourue</h3>
-              <h3 className="font-bold text-xl mt-8 relative left-10">
+              <h3 className="font-bold text-xl mt-8 relative left-5">
                 {" "}
                 Emission CO2 totale
               </h3>
