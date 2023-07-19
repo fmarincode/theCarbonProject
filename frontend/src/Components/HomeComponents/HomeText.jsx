@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./HomeText.css";
 import Inscription from "../Inscription/Inscription";
 
 function HomeText() {
@@ -10,7 +9,7 @@ function HomeText() {
   };
 
   return (
-    <div className="homeText">
+    <div className="">
       {!inscriptionComponent ? (
         <>
           <p>
@@ -24,11 +23,7 @@ function HomeText() {
             blanditiis cupiditate ab harum praesentium, vel itaque voluptas sint
             quia? Minus soluta repellat nihil earum!
           </p>
-          <button
-            type="button"
-            className="inscriptionBtn"
-            onClick={inscriptionBtn}
-          >
+          <button type="button" className="" onClick={inscriptionBtn}>
             S'inscrire
           </button>
         </>
