@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 
 const textInputStyle = {
-  width: "75%",
-  padding: "5px 10px",
+  width: "100%",
+  padding: "0.5rem 1rem",
   border: "none",
   borderBottom: "1px solid #645979",
   outline: "none",
@@ -71,10 +71,10 @@ function Inscription() {
   return (
     <div className="flex flex-col items-center">
       <form
-        className="flex flex-row flex-wrap justify-around mt-6"
+        className="flex flex-col mt-6 md:w-full md:flex-row md:justify-around md:flex-wrap "
         onSubmit={submitInscription}
       >
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mb-5">
           <label htmlFor="firstname" className="font-bold text-center mb-2">
             Prénom
           </label>
@@ -87,21 +87,21 @@ function Inscription() {
             required
           />
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mb-5">
           <label htmlFor="email" className="font-bold text-center mb-2">
             E-mail
           </label>
           <input
             type="email"
             id="email"
-            style={textInputStyle}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md outline-none focus:border-indigo-500"
             name="email"
             value={formInscription.email}
             onChange={handleChangeFormInscription}
             required
           />
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center mb-5">
           <label htmlFor="password" className="font-bold text-center mb-2">
             Mot de passe
           </label>
@@ -111,14 +111,14 @@ function Inscription() {
             name="pwd"
             value={formInscription.pwd}
             onChange={handleChangeFormInscription}
-            style={textInputStyle}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md outline-none focus:border-indigo-500"
             required
           />
         </div>
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center mb-5 md:mt-10">
           <button
             type="submit"
-            className={`rounded-full font-bold pt-4 pb-4 pl-8 pr-8 w-32 mt-11 ${
+            className={`rounded-full font-bold py-2 px-8 w-32 ${
               formSent ? "bg-[#8A8C46]" : "bg-[#D96E30]"
             }`}
           >

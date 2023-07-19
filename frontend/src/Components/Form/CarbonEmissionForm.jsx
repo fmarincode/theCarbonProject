@@ -225,8 +225,8 @@ function CarbonEmissionForm() {
               {cityNameSuggest.map((city, index) => (
                 <li
                   role="presentation"
-                  key={city[index]}
-                  className="customListItem"
+                  key={index}
+                  className="p-2 text-sm hover:bg-[#d96e30] hover:text-white overflow-y-auto"
                   onClick={() => handleCityClickedDisplayDeparture(city)}
                 >
                   <p className="citySuggested">{city}</p>
@@ -254,7 +254,7 @@ function CarbonEmissionForm() {
               {cityNameSuggest.map((city, index) => (
                 <li
                   role="presentation"
-                  key={city[index]}
+                  key={index}
                   className="customListItem"
                   onClick={() => handleCityClickedDisplayArrival(city)}
                 >
