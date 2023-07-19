@@ -1,0 +1,23 @@
+.homeContainer {
+  width: 80vw;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 40%;
+  left: 50%;
+  background-color: #ffffff7e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.titleContainer {
+  height: 10vh;
+  margin-top: 5vh;
+  font-size: 2em;
+}
+
+.subContainer {
+  text-align: justify;
+  width: 70vw;
+}
