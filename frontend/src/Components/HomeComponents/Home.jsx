@@ -1,5 +1,4 @@
 import React from "react";
-import "./Home.css";
 import HomeText from "./HomeText";
 
 function Home() {
