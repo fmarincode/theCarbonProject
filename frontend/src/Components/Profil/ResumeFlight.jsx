@@ -38,11 +38,11 @@ function ResumeFlight() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] min-h-[72vh] bg-[#c4c589ba] flex flex-col w-full mx-3 items-center my-auto rounded-lg">
+      <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col w-full mx-3 items-center my-auto rounded-lg">
         <h2 className="text-[#274001] flex items-center font-bold w-3/4 text-center justify-center text-2xl mb-5 mt-10">
           {firstname}, le résumé de tes trajets
         </h2>
-        <div className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md m-5 p-5">
+        <div className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md m-5 p-5 md:flex-row md:justify-around">
           <p className="text-justify flex items-center mb-1 text-xl">
             {departure} <FaPlane className="ml-2 mr-2" /> {arrival}
           </p>

@@ -13,7 +13,7 @@ import background from "../assets/imgs/kazuend-19SC2oaVZW0-unsplash.jpg";
 function App() {
   return (
     <div
-      className="bg-[#6F7355] bg-cover bg-center h-screen"
+      className="bg-cover bg-center h-screen"
       style={{ backgroundImage: `url(${background})` }}
     >
       <UserProvider>
