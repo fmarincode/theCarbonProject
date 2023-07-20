@@ -13,6 +13,7 @@ const textInputStyle = {
   outline: "none",
   borderRadius: "5px",
   fontSize: "1rem",
+  fontWeight: "bold",
 };
 
 function CarbonEmissionForm() {
@@ -283,11 +284,11 @@ function CarbonEmissionForm() {
               {counterCO2Solo} kg
             </h3>
           </div>
-          <p className="text-justify pl-5 pr-5 drop-shadow-lg">
+          <p className="text-justify pl-5 pr-5 font-bold drop-shadow-lg">
             Ton voyage entre {userInputDepartureAirport} et{" "}
             {userInputArrivalAirport} d'une distance de {counterKm} km émet{" "}
-            {counterCO2Total} kg de dioxyde de carbone. Tu participes activement
-            à l'augmentation des températures de notre chère planète Terre. Nous
+            {counterCO2Total} kg de dioxyde de carbone. Tu participes à
+            l'augmentation des températures de notre chère planète Terre. Nous
             espérons que tu pourras trouver un autre moyen de transport que
             l'avion pour te rendre à ta destination. En attendant, tu peux
             sauvegarder ce trajet ainsi que les prochains afin de les comparer
@@ -320,7 +321,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="departure-airport"
-                className="font-bold text-center text-xl mb-2 drop-shadow-lg"
+                className="font-bold text-center text-xl mb-2"
               >
                 Aéroport de départ
               </label>
@@ -333,12 +334,12 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[43.5%] left-22 h-auto max-h-40 md:left-[21.3%] md:top-[48.5%]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[41.5%] left-[21.5%] h-auto max-h-40 md:left-[3vw] md:top-[24vh] md:w-[12vw] lg:left-[6.55vw] lg:top-[24.5vh] lg:w-[6.6vw] ">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
                     key={index}
-                    className="hover:bg-[#6C8C26] text-lg pl-4"
+                    className="hover:bg-[#6C8C26] text-lg pl-4 cursor-pointer"
                     onClick={() => handleCityClickedDisplayDeparture(city)}
                   >
                     <p className="citySuggested">{city}</p>
@@ -349,7 +350,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center justify-around">
               <label
                 htmlFor="arrival-airport"
-                className="font-bold text-center text-xl mb-2 mt-4 md:mt-0 drop-shadow-lg"
+                className="font-bold text-center text-xl mb-2 mt-4 md:mt-0"
               >
                 Aéroport d'arrivée{" "}
               </label>
@@ -362,12 +363,12 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[53.5%] left-22 h-auto max-h-40 md:top-[48.5%] md:left-[44%]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[56.5%] left-[21.5%] h-auto max-h-40 md:top-[24vh] md:left-[25vw] md:w-[12vw] lg:left-[28.5vw] lg:top-[24.5vh] lg:w-[6.6vw] ">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
                     key={index}
-                    className="hover:bg-[#6C8C26] text-lg pl-4"
+                    className="hover:bg-[#6C8C26] text-lg pl-4 cursor-pointer"
                     onClick={() => handleCityClickedDisplayArrival(city)}
                   >
                     <p className="citySuggested">{city}</p>
@@ -379,7 +380,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="numb-passengers"
-                className="font-bold text-center mb-2 text-xl mt-4 md:mt-0 drop-shadow-lg"
+                className="font-bold text-center mb-2 text-xl mt-4 md:mt-0"
               >
                 Nombre de passagers{" "}
               </label>
