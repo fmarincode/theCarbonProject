@@ -38,24 +38,30 @@ function ResumeFlight() {
 
   return (
     <div className="flex items-center justify-center h-screen">
-      <div className="min-w-[65%] max-w-[65%] min-h-[50vh] bg-[#BEBF93] flex items-center flex-col mx-auto my-auto rounded-lg">
-        <h2 className="text-[#D96E30] flex items-center font-bold justify-center text-5xl mb-10 mt-5">
+      <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] min-h-[72vh] bg-[#c4c589ba] flex flex-col w-full mx-3 items-center my-auto rounded-lg">
+        <h2 className="text-[#274001] flex items-center font-bold w-3/4 text-center justify-center text-2xl mb-5 mt-10">
           {firstname}, le résumé de tes trajets
         </h2>
-        <div className="flex flex-row w-3/4 justify-around bg-[#D9D7C5] rounded-md m-8 p-8">
-          <p className="text-justify flex items-center">
+        <div className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md m-5 p-5">
+          <p className="text-justify flex items-center mb-1 text-xl">
             {departure} <FaPlane className="ml-2 mr-2" /> {arrival}
           </p>
-          <p>{passengers} passagers</p>
-          <p>{totalKgEmission}kg CO2</p>
+          <p className="text-justify flex items-center mb-1 text-xl">
+            {passengers} passagers
+          </p>
+          <p className="text-justify flex items-center mb-1 text-xl">
+            {totalKgEmission}kg CO2
+          </p>
         </div>
-        <button
-          type="button"
-          onClick={navigateToHome}
-          className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-32 mt-10"
-        >
-          Accueil
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="button"
+            onClick={navigateToHome}
+            className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#6C8C26] w-32 mt-10"
+          >
+            Accueil
+          </button>
+        </div>
       </div>
     </div>
   );
