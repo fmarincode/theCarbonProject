@@ -69,12 +69,12 @@ function Inscription() {
   }, [formSent]);
 
   return (
-    <div className="md:min-w-[65%] md:max-w-[65%] min-h-[55.5vh]flex flex-col mx-3 my-auto rounded-lg">
+    <div className="min-h-[55.5vh] flex flex-col mx-3 my-auto rounded-lg">
       <form
-        className="flex flex-col mt-6 md:w-full md:flex-row md:justify-around md:flex-wrap"
+        className="flex flex-col mt-6 w-full md:flex-row md:w-full md:flex-wrap md:justify-around"
         onSubmit={submitInscription}
       >
-        <div className="flex flex-col  items-center mb-5">
+        <div className="flex flex-col items-center mb-5">
           <label htmlFor="firstname" className="font-bold  text-center mb-2">
             Prénom
           </label>
@@ -115,7 +115,7 @@ function Inscription() {
             required
           />
         </div>
-        <div className="w-full flex flex-col items-center mb-5 md:mt-10">
+        <div className="w-full items-center flex justify-center mb-5 md:mt-10">
           <button
             type="submit"
             className={`rounded-full font-bold py-2 px-8 w-32 mt-5 mb-5 ${

@@ -205,7 +205,7 @@ function CarbonEmissionForm() {
   return (
     <div className="flex items-center justify-center h-screen ">
       {showResults ? (
-        <div className="flex flex-col mt-6 bg-[#c4c589ba] min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] rounded-md p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:justify-around">
+        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] flex flex-col mt-6 md:mt-0 bg-[#c4c589ba] min-w-[95%] max-w-[95%] rounded-md p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:flex-wrap md:justify-around">
           <div className="flex justify-center flex-col items-center">
             <h3 className="font-bold text-xl mt-2 md:mt-8">
               {" "}
@@ -229,7 +229,7 @@ function CarbonEmissionForm() {
               {" "}
               Emission CO2 individuelle
             </h3>
-            <h3 className="font-bold text-2xl mb-6 text-[#274001]">
+            <h3 className="font-bold text-2xl mb-6 md:mb-0 text-[#274001]">
               {Math.round(resultCo2 / numbOfPassengers)} kg
             </h3>
           </div>
@@ -246,14 +246,14 @@ function CarbonEmissionForm() {
           <div className="flex justify-around">
             <button
               type="submit"
-              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3"
+              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:mr-10"
               onClick={saveFlight}
             >
               Sauvegarder
             </button>
             <button
               type="submit"
-              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3"
+              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:ml-10"
               onClick={calculAgain}
             >
               Calculer
@@ -261,12 +261,12 @@ function CarbonEmissionForm() {
           </div>
         </div>
       ) : (
-        <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-lg">
-          <h2 className="text-[#274001] flex items-center font-bold w-3/4 text-center justify-center text-2xl mb-5 mt-10">
+        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-lg">
+          <h2 className="text-[#274001] font-bold w-3/4 text-center text-2xl mb-5 mt-10">
             {firstname}, calcules l'émission de CO2 de ton trajet en avion
           </h2>
 
-          <form className="flex flex-col mt-6">
+          <form className="flex flex-col mt-6 md:flex-row md:w-full md:flex-wrap md:justify-around ">
             <div className="flex flex-col items-center">
               <label
                 htmlFor="departure-airport"
@@ -296,7 +296,7 @@ function CarbonEmissionForm() {
                 ))}
               </ul>
             )}
-            <div className="flex flex-col items-center mt-12">
+            <div className="flex flex-col items-center mt-12 md:mt-0 md:ml-5">
               <label
                 htmlFor="arrival-airport"
                 className="font-bold text-center mb-2"
