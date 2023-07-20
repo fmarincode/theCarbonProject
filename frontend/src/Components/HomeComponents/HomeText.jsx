@@ -13,9 +13,10 @@ function HomeText() {
       {!inscriptionComponent ? (
         <>
           <p className="text-[#242422] text-justify px-5 md:pr-10 md:pl-10 font-bold text-lg drop-shadow-lg">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-            tenetur tempora assumenda eius deserunt consequuntur iusto suscipit
-            quaerat quasi consequatur voluptatum porro? Provident culpa deserunt
+            Bonjour, si tu es arrivé jusqu'ici c'est que notre ami Google fait
+            très bien son boulot. Ici, grâce à l'API de Carbon Interface, tu vas
+            pouvoir calculer le poids du rejet en CO2 de tes déplacements en
+            avion. Mais avant ça, un peu de latin : Provident culpa deserunt
             quibusdam nostrum accusamus enim vitae. Repellat sapiente libero
             necessitatibus non rem accusamus ad esse ullam maxime blanditiis
             cupiditate ab harum praesentium!

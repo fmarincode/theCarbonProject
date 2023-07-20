@@ -334,7 +334,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[41.5%] left-[21.5%] h-auto max-h-40 lg:left-[3.5vw] lg:top-[24.5vh] lg:w-[11.5vw] ">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-[44vw] absolute top-[30vh] left-[18.5vw] h-auto max-h-40 lg:left-[3.5vw] lg:top-[24.5vh] lg:w-[11.5vw] ">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -363,7 +363,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[56.5%] left-[21.5%] h-auto max-h-40 lg:left-[25.8vw] lg:top-[24.5vh] lg:w-[11.5vw]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-[44vw] absolute top-[40.2vh] left-[18.5vw] h-auto max-h-40 lg:left-[25.8vw] lg:top-[24.5vh] lg:w-[11.5vw]">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
