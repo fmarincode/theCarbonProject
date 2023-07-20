@@ -211,7 +211,7 @@ function CarbonEmissionForm() {
               {" "}
               Distance parcourue
             </h3>
-            <h3 className="font-bold text-2xl text-[#6C8C26]">
+            <h3 className="font-bold text-2xl text-[#274001]">
               {Math.round(resultDistance)} km{" "}
             </h3>
           </div>
@@ -220,7 +220,7 @@ function CarbonEmissionForm() {
               {" "}
               Emission CO2 totale
             </h3>
-            <h3 className="font-bold text-2xl text-[#6C8C26]">
+            <h3 className="font-bold text-2xl text-[#274001]">
               {Math.round(resultCo2)} kg
             </h3>
           </div>
@@ -229,7 +229,7 @@ function CarbonEmissionForm() {
               {" "}
               Emission CO2 individuelle
             </h3>
-            <h3 className="font-bold text-2xl mb-6 text-[#6C8C26]">
+            <h3 className="font-bold text-2xl mb-6 text-[#274001]">
               {Math.round(resultCo2 / numbOfPassengers)} kg
             </h3>
           </div>

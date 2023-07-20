@@ -9,19 +9,16 @@ function HomeText() {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-5 md:space-y-10">
+    <div className="flex flex-col items-center space-y-5 min-h-[55.5vh] md:space-y-10">
       {!inscriptionComponent ? (
         <>
           <p className="text-[#242422] text-justify px-5 md:pr-10 md:pl-10 font-bold">
-            Le CO2 est le principal gaz à effet de serre Lorem ipsum dolor sit
-            amet consectetur adipisicing elit. Rerum tenetur tempora assumenda
-            eius deserunt consequuntur iusto suscipit quaerat quasi consequatur
-            voluptatum illo id eaque fugiat accusantium omnis, laboriosam iure
-            mollitia facilis sed quia optio deleniti porro? Provident culpa
-            deserunt quibusdam nostrum accusamus enim vitae. Repellat sapiente
-            libero iure quasi earum eaque aliquid nobis necessitatibus non rem
-            accusamus ad esse ullam maxime blanditiis cupiditate ab harum
-            praesentium!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+            tenetur tempora assumenda eius deserunt consequuntur iusto suscipit
+            quaerat quasi consequatur voluptatum porro? Provident culpa deserunt
+            quibusdam nostrum accusamus enim vitae. Repellat sapiente libero
+            necessitatibus non rem accusamus ad esse ullam maxime blanditiis
+            cupiditate ab harum praesentium!
           </p>
           <div className="mb-5">
             <button
