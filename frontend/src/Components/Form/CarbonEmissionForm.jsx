@@ -258,7 +258,7 @@ function CarbonEmissionForm() {
       {showResults ? (
         <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] flex flex-col mt-6 md:mt-0 bg-[#c4c589ba] min-w-[95%] max-w-[95%] p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:flex-wrap md:justify-around rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Distance parcourue
             </h3>
@@ -267,7 +267,7 @@ function CarbonEmissionForm() {
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl  font-display mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Emission CO2 totale
             </h3>
@@ -276,7 +276,7 @@ function CarbonEmissionForm() {
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Emission CO2 individuelle
             </h3>
@@ -284,7 +284,7 @@ function CarbonEmissionForm() {
               {counterCO2Solo} kg
             </h3>
           </div>
-          <p className="text-justify pl-5 pr-5 font-bold drop-shadow-lg">
+          <p className="text-justify pl-5 pr-5 font-display font-bold drop-shadow-lg">
             Ton voyage entre {userInputDepartureAirport} et{" "}
             {userInputArrivalAirport} d'une distance de {counterKm} km émet{" "}
             {counterCO2Total} kg de dioxyde de carbone. Tu participes à
@@ -313,7 +313,7 @@ function CarbonEmissionForm() {
         </div>
       ) : (
         <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
-          <h2 className="text-[#274001] font-bold w-3/4 text-center text-2xl mb-5 mt-10 drop-shadow-lg">
+          <h2 className="text-[#274001] font-display font-bold w-3/4 text-center text-2xl mb-5 mt-10 drop-shadow-lg">
             {firstname}, calcule l'émission de CO2 de ton trajet en avion
           </h2>
 
@@ -321,7 +321,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="departure-airport"
-                className="font-bold text-center text-xl mb-2"
+                className="font-bold  font-display text-center text-xl mb-2"
               >
                 Aéroport de départ
               </label>
@@ -334,7 +334,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[41.5%] left-[21.5%] h-auto max-h-40 md:left-[3vw] md:top-[24vh] md:w-[12vw] lg:left-[6.55vw] lg:top-[24.5vh] lg:w-[6.6vw] ">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[41.5%] left-[21.5%] h-auto max-h-40 lg:left-[3.5vw] lg:top-[24.5vh] lg:w-[11.5vw] ">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -350,7 +350,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center justify-around">
               <label
                 htmlFor="arrival-airport"
-                className="font-bold text-center text-xl mb-2 mt-4 md:mt-0"
+                className="font-bold text-center font-display text-xl mb-2 mt-4 md:mt-0"
               >
                 Aéroport d'arrivée{" "}
               </label>
@@ -363,7 +363,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[56.5%] left-[21.5%] h-auto max-h-40 md:top-[24vh] md:left-[25vw] md:w-[12vw] lg:left-[28.5vw] lg:top-[24.5vh] lg:w-[6.6vw] ">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[56.5%] left-[21.5%] h-auto max-h-40 lg:left-[25.8vw] lg:top-[24.5vh] lg:w-[11.5vw]">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -380,7 +380,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="numb-passengers"
-                className="font-bold text-center mb-2 text-xl mt-4 md:mt-0"
+                className="font-bold text-center mb-2 font-display text-xl mt-4 md:mt-0"
               >
                 Nombre de passagers{" "}
               </label>
