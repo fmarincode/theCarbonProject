@@ -69,9 +69,9 @@ function Inscription() {
   }, [formSent]);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="md:min-w-[65%] md:max-w-[65%] min-h-[55.5vh] bg-[#c4c589ba] flex flex-col mx-3 my-auto rounded-lg">
       <form
-        className="flex flex-col mt-6 md:w-full md:flex-row md:justify-around md:flex-wrap "
+        className="flex flex-col mt-6 md:w-full md:flex-row md:justify-around md:flex-wrap"
         onSubmit={submitInscription}
       >
         <div className="flex flex-col items-center mb-5">
@@ -118,8 +118,8 @@ function Inscription() {
         <div className="w-full flex flex-col items-center mb-5 md:mt-10">
           <button
             type="submit"
-            className={`rounded-full font-bold py-2 px-8 w-32 ${
-              formSent ? "bg-[#8A8C46]" : "bg-[#D96E30]"
+            className={`rounded-full font-bold py-2 px-8 w-32 mt-5 mb-5 ${
+              formSent ? "bg-[#8A8C46]" : "bg-[#6C8C26]"
             }`}
           >
             Valider

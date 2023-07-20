@@ -8,10 +8,14 @@ import { UserProvider } from "./contexts/UserContext";
 import HomePage from "./pages/HomePage";
 import InscriptionPage from "./pages/InscriptionPage";
 import UserProfil from "./pages/UserProfil";
+import background from "../assets/imgs/kazuend-19SC2oaVZW0-unsplash.jpg";
 
 function App() {
   return (
-    <div className="bg-[#6F7355]">
+    <div
+      className="bg-[#6F7355] bg-cover bg-center h-screen"
+      style={{ backgroundImage: `url(${background})` }}
+    >
       <UserProvider>
         <Routes>
           <Route path="/" element={<HomePage />} />

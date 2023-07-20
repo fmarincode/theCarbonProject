@@ -27,7 +27,7 @@ function CarbonEmissionForm() {
   const [arrivalAirport, setArrivalAirport] = useState(""); // input value use to calcul, city arrival
   const [numbOfPassengers, setNumbOfPassengers] = useState(""); // input value use to calcul, nb of passengers
   const [showResults, setshowResults] = useState(false); // display or not the result
-  const [resultCo2, setResultCo2] = useState(""); // result of carbon emission in kg
+  const [resultCo2, setResultCo2] = useState(); // result of carbon emission in kg
   const [resultDistance, setResultDistance] = useState(""); // result of distance between the cities in km
   const [cityNameSuggest, setCityNameSuggest] = useState([]); // array with suggestion of city depends of input value
   const [usingApi, setUsingApi] = useState(1); // counter API calls
@@ -197,148 +197,167 @@ function CarbonEmissionForm() {
       });
   };
 
+  const calculAgain = (evt) => {
+    evt.preventDefault();
+    setshowResults(false);
+  };
+
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="min-w-[65%] max-w-[65%] min-h-[50vh] bg-[#BEBF93] flex flex-col mx-auto my-auto rounded-lg">
-        <h2 className="text-[#D96E30] flex items-center font-bold justify-center text-3xl mb-10 mt-5 ">
-          {firstname}, calcules l'émission de CO2 de ton trajet en avion
-        </h2>
-
-        <form className="flex flex-row justify-center mt-6">
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="departure-airport"
-              className="font-bold text-center mb-2"
-            >
-              Aéroport de départ
-            </label>
-            <input
-              type="search"
-              style={textInputStyle}
-              value={userInputDepartureAirport}
-              onChange={handleDeparture}
-            />
+    <div className="flex items-center justify-center h-screen ">
+      {showResults ? (
+        <div className="flex flex-col mt-6 bg-[#c4c589ba] min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] rounded-md p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:justify-around">
+          <div className="flex justify-center flex-col items-center">
+            <h3 className="font-bold text-xl mt-2 md:mt-8">
+              {" "}
+              Distance parcourue
+            </h3>
+            <h3 className="font-bold text-2xl text-[#6C8C26]">
+              {Math.round(resultDistance)} km{" "}
+            </h3>
           </div>
-
-          {userInputDepartureAirport !== "" && showSuggestDeparture && (
-            <ul className="displaySuggestDeparture">
-              {cityNameSuggest.map((city, index) => (
-                <li
-                  role="presentation"
-                  key={index}
-                  className="p-2 text-sm hover:bg-[#d96e30] hover:text-white overflow-y-auto"
-                  onClick={() => handleCityClickedDisplayDeparture(city)}
-                >
-                  <p className="citySuggested">{city}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="arrival-airport"
-              className="font-bold text-center mb-2"
-            >
-              Aéroport d'arrivée{" "}
-            </label>
-            <input
-              type="search"
-              style={textInputStyle}
-              value={userInputArrivalAirport}
-              onChange={handleArrival}
-            />
+          <div className="flex justify-center flex-col items-center">
+            <h3 className="font-bold text-xl mt-2 md:mt-8">
+              {" "}
+              Emission CO2 totale
+            </h3>
+            <h3 className="font-bold text-2xl text-[#6C8C26]">
+              {Math.round(resultCo2)} kg
+            </h3>
           </div>
-
-          {userInputArrivalAirport !== "" && showSuggestArrival && (
-            <ul className="displaySuggestArrival">
-              {cityNameSuggest.map((city, index) => (
-                <li
-                  role="presentation"
-                  key={index}
-                  className="customListItem"
-                  onClick={() => handleCityClickedDisplayArrival(city)}
-                >
-                  <p className="citySuggested">{city}</p>
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <br />
-          <br />
-          <div className="flex flex-col items-center">
-            <label
-              htmlFor="numb-passengers"
-              className="font-bold text-center mb-2"
-            >
-              Nombre de passagers{" "}
-            </label>
-            <input
-              type="number"
-              style={textInputStyle}
-              value={numbOfPassengers}
-              min="1"
-              max="1000"
-              onChange={handleNumbOfPassengers}
-            />
+          <div className="flex justify-center flex-col items-center">
+            <h3 className="font-bold text-xl mt-2 md:mt-8">
+              {" "}
+              Emission CO2 individuelle
+            </h3>
+            <h3 className="font-bold text-2xl mb-6 text-[#6C8C26]">
+              {Math.round(resultCo2 / numbOfPassengers)} kg
+            </h3>
           </div>
-          <br />
-          <br />
-        </form>
-        <div className="flex justify-center">
-          <button
-            type="button"
-            className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-32 mt-11"
-            onClick={calculateCarbonEmission}
-          >
-            Calculer
-          </button>
+          <p className="text-justify pl-5 pr-5">
+            Ton voyage entre {userInputDepartureAirport} et{" "}
+            {userInputArrivalAirport} d'une distance de {resultDistance} km émet{" "}
+            {resultCo2} kg de dioxyde de carbone. Tu participes activement à
+            l'augmentation des températures de notre chère planète Terre. Nous
+            espérons que tu pourras trouver un autre moyen de transport que
+            l'avion pour te rendre à ta destination. En attendant, tu peux
+            sauvegarder ce trajet ainsi que les prochains afin de les comparer
+            et trouver le voyage qui te fera le moins culpabiliser.
+          </p>
+          <div className="flex justify-around">
+            <button
+              type="submit"
+              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3"
+              onClick={saveFlight}
+            >
+              Sauvegarder
+            </button>
+            <button
+              type="submit"
+              className="rounded-full font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3"
+              onClick={calculAgain}
+            >
+              Calculer
+            </button>
+          </div>
         </div>
+      ) : (
+        <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[65%] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-lg">
+          <h2 className="text-[#274001] flex items-center font-bold w-3/4 text-center justify-center text-2xl mb-5 mt-10">
+            {firstname}, calcules l'émission de CO2 de ton trajet en avion
+          </h2>
 
-        {showResults && (
-          <div className="flex flex-col mt-8 justify-around bg-[#D9D7C5] rounded-md m-8 p-8">
-            <div className="flex justify-around">
-              <h3 className="font-bold text-4xl"> {resultDistance} km </h3>
-              <h3 className="font-bold text-4xl"> {resultCo2} kg</h3>
-              <h3 className="font-bold text-4xl">
-                {resultCo2 / numbOfPassengers} kg
-              </h3>
-            </div>
-            <div className="flex justify-around">
-              <h3 className="font-bold text-xl mt-8"> Distance parcourue</h3>
-              <h3 className="font-bold text-xl mt-8 relative left-5">
-                {" "}
-                Emission CO2 totale
-              </h3>
-              <h3 className="font-bold text-xl mt-8 relative left-5">
-                {" "}
-                Emission CO2 individuelle
-              </h3>
-            </div>
-            <p className="text-justify mt-8 pl-5 pr-5">
-              Ton voyage entre {userInputDepartureAirport} et{" "}
-              {userInputArrivalAirport} d'une distance de {resultDistance} km
-              émet {resultCo2} kg de dioxyde de carbone. Tu participes
-              activement à l'augmentation des températures de notre chère
-              planète Terre. Nous espérons que tu pourras trouver un autre moyen
-              de transport que l'avion pour te rendre à ta destination. En
-              attendant, tu peux sauvegarder ce trajet ainsi que les prochains
-              afin de les comparer et trouver le voyage qui te fera le moins
-              culpabiliser.
-            </p>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="rounded-full font-bold pt-4 pb-4 pl-8 pr-8 bg-[#D96E30] w-40 mt-8 mb-8"
-                onClick={saveFlight}
+          <form className="flex flex-col mt-6">
+            <div className="flex flex-col items-center">
+              <label
+                htmlFor="departure-airport"
+                className="font-bold text-center mb-2"
               >
-                Sauvegarder
-              </button>
+                Aéroport de départ
+              </label>
+              <input
+                type="search"
+                style={textInputStyle}
+                value={userInputDepartureAirport}
+                onChange={handleDeparture}
+              />
             </div>
-            {/* <b>{usingApi} / 200 monthly API usage.</b> */}
+
+            {userInputDepartureAirport !== "" && showSuggestDeparture && (
+              <ul className="displaySuggestDeparture">
+                {cityNameSuggest.map((city, index) => (
+                  <li
+                    role="presentation"
+                    key={index}
+                    className="p-2 text-sm hover:bg-[#d96e30] hover:text-white overflow-y-auto"
+                    onClick={() => handleCityClickedDisplayDeparture(city)}
+                  >
+                    <p className="citySuggested">{city}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="flex flex-col items-center mt-12">
+              <label
+                htmlFor="arrival-airport"
+                className="font-bold text-center mb-2"
+              >
+                Aéroport d'arrivée{" "}
+              </label>
+              <input
+                type="search"
+                style={textInputStyle}
+                value={userInputArrivalAirport}
+                onChange={handleArrival}
+              />
+            </div>
+
+            {userInputArrivalAirport !== "" && showSuggestArrival && (
+              <ul className="list-none w-64 md:w-40 bg-white rounded-md shadow-lg z-10 overflow-y-auto max-h-36 md:max-h-24 absolute md:static bottom-28 md:bottom-auto left-0 md:left-31%">
+                {cityNameSuggest.map((city, index) => (
+                  <li
+                    role="presentation"
+                    key={index}
+                    className="customListItem"
+                    onClick={() => handleCityClickedDisplayArrival(city)}
+                  >
+                    <p className="citySuggested">{city}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            <br />
+            <br />
+            <div className="flex flex-col items-center">
+              <label
+                htmlFor="numb-passengers"
+                className="font-bold text-center mb-2"
+              >
+                Nombre de passagers{" "}
+              </label>
+              <input
+                type="number"
+                style={textInputStyle}
+                value={numbOfPassengers}
+                min="1"
+                max="1000"
+                onChange={handleNumbOfPassengers}
+              />
+            </div>
+            <br />
+            <br />
+          </form>
+          <div className="flex justify-center mt-0">
+            <button
+              type="button"
+              className="rounded-full font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 mt-5 mb-5 md:w-32 md:mt-10"
+              onClick={calculateCarbonEmission}
+            >
+              Calculer
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
