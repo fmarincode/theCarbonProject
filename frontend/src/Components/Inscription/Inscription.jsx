@@ -2,6 +2,8 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
+import earth from "../../assets/earth.png";
+import "./inscription.css";
 
 const textInputStyle = {
   width: "100%",
@@ -11,6 +13,7 @@ const textInputStyle = {
   outline: "none",
   borderRadius: "5px",
   fontSize: "1rem",
+  fontWeight: "bold",
 };
 
 function Inscription() {
@@ -23,6 +26,8 @@ function Inscription() {
     email: "",
     pwd: "",
   });
+
+  const [isRotating, setIsRotating] = useState(false);
 
   const [formSent, setFormSent] = useState(false);
 
@@ -40,6 +45,7 @@ function Inscription() {
       .post(`${import.meta.env.VITE_BACKEND_URL}/users`, formInscription)
       .then(() => {
         setFormSent(true);
+        setIsRotating(true);
       })
       .catch((err) => {
         console.error(err);
@@ -55,7 +61,7 @@ function Inscription() {
         .then((response) => {
           const resultUserId = response.data[0]?.iduser; // permet de récupérer l'id si il y en a un
           setUserId(resultUserId);
-          const resultUserFirstname = response.data[0]?.firstname; // permet de récupérer l'id si il y en a un
+          const resultUserFirstname = response.data[0]?.firstname; // permet de récupérer firstname si il y en a
           setFirstname(resultUserFirstname);
         })
         .catch((err) => {
@@ -75,7 +81,10 @@ function Inscription() {
         onSubmit={submitInscription}
       >
         <div className="flex flex-col items-center mb-5">
-          <label htmlFor="firstname" className="font-bold  text-center mb-2">
+          <label
+            htmlFor="firstname"
+            className="font-bold text-xl text-center mb-2"
+          >
             Prénom
           </label>
           <input
@@ -88,13 +97,13 @@ function Inscription() {
           />
         </div>
         <div className="flex flex-col  items-center mb-5">
-          <label htmlFor="email" className="font-bold  text-center mb-2">
+          <label htmlFor="email" className="font-bold text-xl text-center mb-2">
             E-mail
           </label>
           <input
             type="email"
             id="email"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 font-bold rounded-md outline-none focus:border-indigo-500"
             name="email"
             value={formInscription.email}
             onChange={handleChangeFormInscription}
@@ -102,7 +111,10 @@ function Inscription() {
           />
         </div>
         <div className="flex flex-col  items-center mb-5">
-          <label htmlFor="password" className="font-bold  text-center mb-2">
+          <label
+            htmlFor="password"
+            className="font-bold text-xl text-center mb-2"
+          >
             Mot de passe
           </label>
           <input
@@ -111,7 +123,7 @@ function Inscription() {
             name="pwd"
             value={formInscription.pwd}
             onChange={handleChangeFormInscription}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md font-bold outline-none focus:border-indigo-500"
             required
           />
         </div>
@@ -126,6 +138,13 @@ function Inscription() {
           </button>
         </div>
       </form>
+      <img
+        src={earth}
+        alt="earth"
+        className={`h-16 absolute left-[42.5%] top-[88%] md:left-[90%] md:top-[75%] ${
+          isRotating ? "animate-spin-slow" : ""
+        }`}
+      />
     </div>
   );
 }
