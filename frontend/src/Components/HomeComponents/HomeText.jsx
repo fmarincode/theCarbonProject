@@ -12,7 +12,7 @@ function HomeText() {
     <div className="flex flex-col items-center space-y-5 min-h-[55.5vh] md:space-y-10">
       {!inscriptionComponent ? (
         <>
-          <p className="text-[#242422] text-justify px-5 md:pr-10 md:pl-10 font-bold">
+          <p className="text-[#242422] text-justify px-5 md:pr-10 md:pl-10 font-bold text-lg drop-shadow-lg">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
             tenetur tempora assumenda eius deserunt consequuntur iusto suscipit
             quaerat quasi consequatur voluptatum porro? Provident culpa deserunt

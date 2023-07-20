@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IataCode } from "../../services/IataCode";
@@ -202,42 +202,92 @@ function CarbonEmissionForm() {
     setshowResults(false);
   };
 
+  /* counter animation */
+
+  const [counterKm, setCounterKm] = useState(0);
+  const [counterCO2Total, setCounterCO2Total] = useState(0);
+  const [counterCO2Solo, setCounterCO2Solo] = useState(0);
+
+  useEffect(() => {
+    const intervalKm = setInterval(() => {
+      setCounterKm((prevCounter) => {
+        if (prevCounter >= resultDistance) {
+          clearInterval(intervalKm);
+          return resultDistance;
+        }
+        return prevCounter + 1;
+      });
+    }, 4); // Temps d'itération ajusté pour être plus rapide
+
+    const intervalCO2Total = setInterval(() => {
+      setCounterCO2Total((prevCounter) => {
+        if (prevCounter >= resultCo2) {
+          clearInterval(intervalCO2Total);
+          return resultCo2;
+        }
+        return prevCounter + 1;
+      });
+    }, 7);
+
+    const resultCO2Solo = Math.round(resultCo2 / numbOfPassengers);
+
+    const intervalCO2Solo = setInterval(() => {
+      setCounterCO2Solo((prevCounter) => {
+        if (prevCounter >= resultCO2Solo) {
+          clearInterval(intervalCO2Solo);
+          return resultCO2Solo;
+        }
+        return prevCounter + 1;
+      });
+    }, 7);
+
+    setCounterCO2Solo(0);
+    setCounterCO2Total(0);
+    setCounterKm(0);
+    // Nettoyage des timers lors du démontage du composant
+    return () => {
+      clearInterval(intervalKm);
+      clearInterval(intervalCO2Total);
+      clearInterval(intervalCO2Solo);
+    };
+  }, [resultDistance, resultCo2]);
+
   return (
     <div className="flex items-center justify-center h-screen ">
       {showResults ? (
-        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] flex flex-col mt-6 md:mt-0 bg-[#c4c589ba] min-w-[95%] max-w-[95%] rounded-md p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:flex-wrap md:justify-around">
+        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] flex flex-col mt-6 md:mt-0 bg-[#c4c589ba] min-w-[95%] max-w-[95%] p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:flex-wrap md:justify-around rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8">
+            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Distance parcourue
             </h3>
-            <h3 className="font-bold text-2xl text-[#274001]">
-              {Math.round(resultDistance)} km{" "}
+            <h3 className="font-bold text-2xl text-[#274001] drop-shadow-lg">
+              {counterKm} km{" "}
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8">
+            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Emission CO2 totale
             </h3>
-            <h3 className="font-bold text-2xl text-[#274001]">
-              {Math.round(resultCo2)} kg
+            <h3 className="font-bold text-2xl text-[#274001] drop-shadow-lg">
+              {counterCO2Total} kg
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl mt-2 md:mt-8">
+            <h3 className="font-bold text-xl mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Emission CO2 individuelle
             </h3>
-            <h3 className="font-bold text-2xl mb-6 md:mb-0 text-[#274001]">
-              {Math.round(resultCo2 / numbOfPassengers)} kg
+            <h3 className="font-bold text-2xl mb-6 md:mb-0 text-[#274001] drop-shadow-lg">
+              {counterCO2Solo} kg
             </h3>
           </div>
-          <p className="text-justify pl-5 pr-5">
+          <p className="text-justify pl-5 pr-5 drop-shadow-lg">
             Ton voyage entre {userInputDepartureAirport} et{" "}
-            {userInputArrivalAirport} d'une distance de {resultDistance} km émet{" "}
-            {resultCo2} kg de dioxyde de carbone. Tu participes activement à
-            l'augmentation des températures de notre chère planète Terre. Nous
+            {userInputArrivalAirport} d'une distance de {counterKm} km émet{" "}
+            {counterCO2Total} kg de dioxyde de carbone. Tu participes activement
+            à l'augmentation des températures de notre chère planète Terre. Nous
             espérons que tu pourras trouver un autre moyen de transport que
             l'avion pour te rendre à ta destination. En attendant, tu peux
             sauvegarder ce trajet ainsi que les prochains afin de les comparer
@@ -261,8 +311,8 @@ function CarbonEmissionForm() {
           </div>
         </div>
       ) : (
-        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-lg">
-          <h2 className="text-[#274001] font-bold w-3/4 text-center text-2xl mb-5 mt-10">
+        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
+          <h2 className="text-[#274001] font-bold w-3/4 text-center text-2xl mb-5 mt-10 drop-shadow-lg">
             {firstname}, calcule l'émission de CO2 de ton trajet en avion
           </h2>
 
@@ -270,7 +320,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="departure-airport"
-                className="font-bold text-center mb-2"
+                className="font-bold text-center text-xl mb-2 drop-shadow-lg"
               >
                 Aéroport de départ
               </label>
@@ -283,7 +333,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[363px] left-22 h-auto max-h-40 md:left-[21.3%] md:top-[48.5%]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[43.5%] left-22 h-auto max-h-40 md:left-[21.3%] md:top-[48.5%]">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -296,10 +346,10 @@ function CarbonEmissionForm() {
                 ))}
               </ul>
             )}
-            <div className="flex flex-col items-center mt-12 md:mt-0">
+            <div className="flex flex-col items-center justify-around">
               <label
                 htmlFor="arrival-airport"
-                className="font-bold text-center mb-2"
+                className="font-bold text-center text-xl mb-2 mt-4 md:mt-0 drop-shadow-lg"
               >
                 Aéroport d'arrivée{" "}
               </label>
@@ -312,7 +362,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[480px] left-22 h-auto max-h-40 md:top-[48.5%] md:left-[44%]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[53.5%] left-22 h-auto max-h-40 md:top-[48.5%] md:left-[44%]">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -329,7 +379,7 @@ function CarbonEmissionForm() {
             <div className="flex flex-col items-center">
               <label
                 htmlFor="numb-passengers"
-                className="font-bold text-center mb-2"
+                className="font-bold text-center mb-2 text-xl mt-4 md:mt-0 drop-shadow-lg"
               >
                 Nombre de passagers{" "}
               </label>
