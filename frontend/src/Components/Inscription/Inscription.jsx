@@ -83,7 +83,7 @@ function Inscription() {
         <div className="flex flex-col items-center mb-5">
           <label
             htmlFor="firstname"
-            className="font-bold text-xl text-center mb-2"
+            className="font-bold text-xl font-display text-center mb-2"
           >
             Prénom
           </label>
@@ -97,8 +97,11 @@ function Inscription() {
           />
         </div>
         <div className="flex flex-col  items-center mb-5">
-          <label htmlFor="email" className="font-bold text-xl text-center mb-2">
-            E-mail
+          <label
+            htmlFor="email"
+            className="font-bold font-display text-xl text-center mb-2"
+          >
+            Adresse e-mail
           </label>
           <input
             type="email"
@@ -113,7 +116,7 @@ function Inscription() {
         <div className="flex flex-col  items-center mb-5">
           <label
             htmlFor="password"
-            className="font-bold text-xl text-center mb-2"
+            className="font-bold text-xl font-display text-center mb-2"
           >
             Mot de passe
           </label>

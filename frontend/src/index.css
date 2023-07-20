@@ -2,47 +2,4 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@font-face {
-  font-family: "Cerebri";
-  src: url("../src/fonts/cerebri/CerebriSansPro-Bold.ttf") format("truetype");
-  /* Ajoutez des variantes de la police si nécessaire */
-  font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Cerebri";
-  src: url("../src/fonts/cerebri/CerebriSansPro-ExtraLight.ttf")
-    format("truetype");
-  /* Ajoutez des variantes de la police si nécessaire */
-  font-weight: 100;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Cerebri";
-  src: url("../src/fonts/cerebri/CerebriSansPro-Light.ttf") format("truetype");
-  /* Ajoutez des variantes de la police si nécessaire */
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Cerebri";
-  src: url("../src/fonts/cerebri/CerebriSansPro-Medium.ttf") format("truetype");
-  /* Ajoutez des variantes de la police si nécessaire */
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Cerebri";
-  src: url("../src/fonts/cerebri/CerebriSansPro-Regular.ttf") format("truetype");
-  /* Ajoutez des variantes de la police si nécessaire */
-  font-weight: normal;
-  font-style: normal;
-}
-
-body {
-  font-family: "Cerebri", sans-serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400;700&display=swap");
