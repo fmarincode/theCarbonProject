@@ -133,7 +133,7 @@ function Inscription() {
         <div className="w-full items-center flex justify-center mb-5">
           <button
             type="submit"
-            className={`rounded-full font-bold py-2 px-8 w-32 mt-5 mb-5 ${
+            className={`rounded-full hover:text-white font-bold py-2 px-8 w-32 mt-5 mb-5 ${
               formSent ? "bg-[#8A8C46]" : "bg-[#6C8C26]"
             }`}
           >
