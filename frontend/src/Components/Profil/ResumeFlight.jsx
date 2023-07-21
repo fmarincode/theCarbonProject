@@ -47,7 +47,7 @@ function ResumeFlight() {
             {departure} <FaPlane className="ml-2 mr-2" /> {arrival}
           </p>
           <p className="text-justify flex font-display items-center mb-1 text-xl">
-            {passengers} passagers
+            {passengers} passager(s)
           </p>
           <p className="text-justify flex font-display items-center mb-1 text-xl">
             {totalKgEmission}kg CO2
