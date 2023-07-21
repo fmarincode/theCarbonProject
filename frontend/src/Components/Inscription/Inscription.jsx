@@ -130,7 +130,7 @@ function Inscription() {
             required
           />
         </div>
-        <div className="w-full items-center flex justify-center mb-5 md:mt-10">
+        <div className="w-full items-center flex justify-center mb-5">
           <button
             type="submit"
             className={`rounded-full font-bold py-2 px-8 w-32 mt-5 mb-5 ${
