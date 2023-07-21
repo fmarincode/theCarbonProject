@@ -23,7 +23,7 @@ function HomeText() {
           <div>
             <button
               type="button"
-              className="rounded-full font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 mt-5 mb-5 md:w-32 md:mt-10 md:relative md:bottom-10"
+              className="rounded-full font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 mt-5 mb-5 md:w-32 md:relative md:bottom-10"
               onClick={inscriptionBtn}
             >
               S'inscrire
