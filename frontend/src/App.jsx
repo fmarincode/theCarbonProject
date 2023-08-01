@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import InscriptionPage from "./pages/InscriptionPage";
 import UserProfil from "./pages/UserProfil";
 import background from "./assets/kazuend-19SC2oaVZW0-unsplash.jpg";
+import Navbar from "./Components/Navbar/Navbar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       style={{ backgroundImage: `url(${background})` }}
     >
       <UserProvider>
+        <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/FlightFormPage" element={<FlightFormPage />} />
@@ -24,8 +26,6 @@ function App() {
           <Route path="/profil" element={<UserProfil />} />
         </Routes>
       </UserProvider>
-
-      {/* <Footer /> */}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IataCode } from "../../services/IataCode";
@@ -31,7 +31,7 @@ function CarbonEmissionForm() {
   const [resultCo2, setResultCo2] = useState(); // result of carbon emission in kg
   const [resultDistance, setResultDistance] = useState(""); // result of distance between the cities in km
   const [cityNameSuggest, setCityNameSuggest] = useState([]); // array with suggestion of city depends of input value
-  const [usingApi, setUsingApi] = useState(1); // counter API calls
+  const [usingApi, setUsingApi] = useState(126); // counter API calls
   const [showSuggestDeparture, setShowSuggestDeparture] = useState(true); // show input suggest for departure
   const [showSuggestArrival, setShowSuggestArrival] = useState(true); // show input suggest for arrival
 
@@ -203,67 +203,17 @@ function CarbonEmissionForm() {
     setshowResults(false);
   };
 
-  /* counter animation */
-
-  const [counterKm, setCounterKm] = useState(0);
-  const [counterCO2Total, setCounterCO2Total] = useState(0);
-  const [counterCO2Solo, setCounterCO2Solo] = useState(0);
-
-  useEffect(() => {
-    const intervalKm = setInterval(() => {
-      setCounterKm((prevCounter) => {
-        if (prevCounter >= resultDistance) {
-          clearInterval(intervalKm);
-          return resultDistance;
-        }
-        return prevCounter + 1;
-      });
-    }, 4); // Temps d'itération ajusté pour être plus rapide
-
-    const intervalCO2Total = setInterval(() => {
-      setCounterCO2Total((prevCounter) => {
-        if (prevCounter >= resultCo2) {
-          clearInterval(intervalCO2Total);
-          return resultCo2;
-        }
-        return prevCounter + 1;
-      });
-    }, 7);
-
-    const resultCO2Solo = Math.round(resultCo2 / numbOfPassengers);
-
-    const intervalCO2Solo = setInterval(() => {
-      setCounterCO2Solo((prevCounter) => {
-        if (prevCounter >= resultCO2Solo) {
-          clearInterval(intervalCO2Solo);
-          return resultCO2Solo;
-        }
-        return prevCounter + 1;
-      });
-    }, 7);
-
-    setCounterCO2Solo(0);
-    setCounterCO2Total(0);
-    setCounterKm(0);
-    // Nettoyage des timers lors du démontage du composant
-    return () => {
-      clearInterval(intervalKm);
-      clearInterval(intervalCO2Total);
-      clearInterval(intervalCO2Solo);
-    };
-  }, [resultDistance, resultCo2]);
-
   return (
-    <div className="flex items-center justify-center h-screen ">
+    <div>
       {showResults ? (
-        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] flex flex-col mt-6 md:mt-0 bg-[#c4c589ba] min-w-[95%] max-w-[95%] p-4 mx-2.5 space-y-0 md:space-y-0 md:flex-row md:flex-wrap md:justify-around rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
+        <>
           <div className="flex justify-center flex-col items-center">
             <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
               {" "}
               Distance parcourue
             </h3>
             <h3 className="font-bold text-2xl text-[#274001] drop-shadow-lg">
-              {counterKm} km{" "}
+              {resultDistance} km{" "}
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
@@ -272,7 +222,7 @@ function CarbonEmissionForm() {
               Emission CO2 totale
             </h3>
             <h3 className="font-bold text-2xl text-[#274001] drop-shadow-lg">
-              {counterCO2Total} kg
+              {resultCo2} kg
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
@@ -281,18 +231,18 @@ function CarbonEmissionForm() {
               Emission CO2 individuelle
             </h3>
             <h3 className="font-bold text-2xl mb-6 md:mb-0 text-[#274001] drop-shadow-lg">
-              {counterCO2Solo} kg
+              {resultCo2 / numbOfPassengers} kg
             </h3>
           </div>
           <p className="text-justify pl-5 pr-5 font-display ">
             Ton voyage entre {userInputDepartureAirport} et{" "}
-            {userInputArrivalAirport} d'une distance de {counterKm} km émet{" "}
-            {counterCO2Total} kg de dioxyde de carbone. Tu participes à
-            l'augmentation des températures de notre chère planète Terre. Nous
-            espérons que tu pourras trouver un autre moyen de transport que
-            l'avion pour te rendre à ta destination. En attendant, tu peux
-            sauvegarder ce trajet ainsi que les prochains afin de les comparer
-            et trouver le voyage qui te fera le moins culpabiliser.
+            {userInputArrivalAirport} d'une distance de {resultDistance} km émet{" "}
+            {resultCo2} kg de dioxyde de carbone. Tu participes à l'augmentation
+            des températures de notre chère planète Terre. Nous espérons que tu
+            pourras trouver un autre moyen de transport que l'avion pour te
+            rendre à ta destination. En attendant, tu peux sauvegarder ce trajet
+            ainsi que les prochains afin de les comparer et trouver le voyage
+            qui te fera le moins culpabiliser.
           </p>
           <div className="flex justify-around">
             <button
@@ -310,15 +260,20 @@ function CarbonEmissionForm() {
               Calculer
             </button>
           </div>
-        </div>
+          <p>{usingApi}/200 api calls</p>
+        </>
       ) : (
-        <div className="md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col items-center mx-3 my-auto rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
-          <h2 className="text-[#274001] font-display font-bold w-3/4 text-center text-2xl mb-5 mt-10 drop-shadow-lg">
-            {firstname}, calcule l'émission de CO2 de ton trajet en avion
-          </h2>
+        <>
+          <div className="flex justify-center">
+            <h2 className="text-[#274001] font-display font-bold w-3/4 text-center text-2xl drop-shadow-lg">
+              {firstname
+                ? `${firstname}, calcule l'émission de CO2 de ton trajet en avion`
+                : "Calcule l'émission de CO2 de ton trajet en avion"}
+            </h2>
+          </div>
 
-          <form className="flex flex-col mt-6 md:flex-row md:w-full md:flex-wrap md:justify-around ">
-            <div className="flex flex-col items-center">
+          <form className="flex flex-col md:flex-row md:w-full md:flex-wrap md:justify-around ">
+            <div className="flex flex-col items-center mb-5">
               <label
                 htmlFor="departure-airport"
                 className="font-bold  font-display text-center text-xl mb-2"
@@ -334,20 +289,22 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[41.5%] left-[21.5%] h-auto max-h-40 lg:left-[2.8vw] lg:top-[27vh] lg:w-[12.9vw] ">
-                {cityNameSuggest.map((city, index) => (
-                  <li
-                    role="presentation"
-                    key={index}
-                    className="hover:bg-[#6C8C26] text-lg pl-4 cursor-pointer"
-                    onClick={() => handleCityClickedDisplayDeparture(city)}
-                  >
-                    <p className="citySuggested">{city}</p>
-                  </li>
-                ))}
-              </ul>
+              <div className="relative">
+                <ul className="bg-white overflow-y-auto rounded-md ml-7 -mt-5 w-44 lg:w-[12.9vw] max-h-40 grid gap-2 absolute z-10">
+                  {cityNameSuggest.map((city, index) => (
+                    <li
+                      role="presentation"
+                      key={index}
+                      className="hover:bg-[#6C8C26] text-lg pl-4 cursor-pointer"
+                      onClick={() => handleCityClickedDisplayDeparture(city)}
+                    >
+                      <p className="citySuggested">{city}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             )}
-            <div className="flex flex-col items-center justify-around">
+            <div className="flex flex-col items-center justify-around mb-5">
               <label
                 htmlFor="arrival-airport"
                 className="font-bold text-center font-display text-xl mb-2 mt-4 md:mt-0"
@@ -363,7 +320,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-6 w-40 absolute top-[56.5%] left-[21.5%] h-auto max-h-40 lg:left-[25vw] lg:top-[27vh] lg:w-[12.9vw]">
+              <ul className="bg-white overflow-y-auto rounded-md ml-7 mt-[21vh] w-44 lg:w-[12.9vw] max-h-40 grid gap-2 absolute z-10">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -394,16 +351,16 @@ function CarbonEmissionForm() {
               />
             </div>
           </form>
-          <div className="flex justify-center mt-0">
+          <div className="flex flex-col justify-center">
             <button
               type="button"
-              className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 mt-5 mb-5 md:w-32 md:mt-10"
+              className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 md:w-32 md:mt-10"
               onClick={calculateCarbonEmission}
             >
               Calculer
             </button>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
