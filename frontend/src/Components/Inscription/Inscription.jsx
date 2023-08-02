@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UserContext from "../../contexts/UserContext";
 import earth from "../../assets/earth.png";
 import "./inscription.css";
+import FormContext from "../../contexts/FormContext";
 
 const textInputStyle = {
   width: "100%",
@@ -18,6 +19,7 @@ const textInputStyle = {
 
 function Inscription() {
   const { setUserId, setFirstname } = useContext(UserContext);
+  const { formUserValues } = useContext(FormContext);
 
   const navigate = useNavigate();
 
@@ -67,17 +69,22 @@ function Inscription() {
         .catch((err) => {
           console.error(err);
         });
-
-      setTimeout(() => {
-        navigate("/FlightFormPage");
-      }, 2000);
+      if (formUserValues) {
+        setTimeout(() => {
+          navigate("/profil");
+        }, 2000);
+      } else {
+        setTimeout(() => {
+          navigate("/FlightFormPage");
+        }, 2000);
+      }
     }
   }, [formSent]);
 
   return (
-    <div className="min-h-[55.5vh] flex flex-col mx-3 my-auto rounded-lg">
+    <div className="flex flex-col items-center mx-3 rounded-lg">
       <form
-        className="flex flex-col mt-6 w-full md:flex-row md:w-full md:flex-wrap md:justify-around"
+        className="flex flex-col w-3/4 md:flex-row md:w-full md:flex-wrap md:justify-around"
         onSubmit={submitInscription}
       >
         <div className="flex flex-col items-center mb-5">

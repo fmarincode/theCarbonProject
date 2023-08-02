@@ -13,11 +13,32 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
+  models.user
+    .findUserById(req.params.id)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        res.send(rows[0]);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
+const readByEmail = (req, res) => {
   const { email } = req.query;
   models.user
     .findByEmail(email)
     .then(([result]) => {
-      res.send(result);
+      if (result.length === 0) {
+        // Modification ici
+        res.sendStatus(404);
+      } else {
+        res.send(result[0]); // Modification ici
+      }
     })
     .catch((err) => {
       console.error(err);
@@ -85,4 +106,5 @@ module.exports = {
   edit,
   add,
   destroy,
+  readByEmail,
 };

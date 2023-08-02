@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { IataCode } from "../../services/IataCode";
 import "./CarbonEmissionForm.css";
 import UserContext from "../../contexts/UserContext";
+import FormContext from "../../contexts/FormContext";
 
 const textInputStyle = {
   width: "75%",
@@ -20,6 +21,7 @@ function CarbonEmissionForm() {
   const navigate = useNavigate();
 
   const { userId, firstname } = useContext(UserContext);
+  const { setFormUserValues } = useContext(FormContext);
 
   const [userInputDepartureAirport, setUserInputDepartureAirport] =
     useState(""); // input value
@@ -188,14 +190,20 @@ function CarbonEmissionForm() {
 
   const saveFlight = (evt) => {
     evt.preventDefault();
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/flights`, formTravel)
-      .then(() => {
-        navigate("/profil");
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+
+    if (userId) {
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/flights`, formTravel)
+        .then(() => {
+          navigate("/profil");
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      setFormUserValues(formTravel);
+      navigate("/inscription");
+    }
   };
 
   const calculAgain = (evt) => {
@@ -265,15 +273,15 @@ function CarbonEmissionForm() {
       ) : (
         <>
           <div className="flex justify-center">
-            <h2 className="text-[#274001] font-display font-bold w-3/4 text-center text-2xl drop-shadow-lg">
+            <h2 className="text-[#274001] font-display font-bold w-full text-center text-4xl drop-shadow-lg">
               {firstname
                 ? `${firstname}, calcule l'émission de CO2 de ton trajet en avion`
                 : "Calcule l'émission de CO2 de ton trajet en avion"}
             </h2>
           </div>
 
-          <form className="flex flex-col md:flex-row md:w-full md:flex-wrap md:justify-around ">
-            <div className="flex flex-col items-center mb-5">
+          <form className="flex flex-col items-center pt-10 md:flex-row md:w-full md:flex-wrap md:justify-around ">
+            <div className="flex flex-col items-center w-60 mb-5">
               <label
                 htmlFor="departure-airport"
                 className="font-bold  font-display text-center text-xl mb-2"
@@ -290,7 +298,7 @@ function CarbonEmissionForm() {
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
               <div className="relative">
-                <ul className="bg-white overflow-y-auto rounded-md ml-7 -mt-5 w-44 lg:w-[12.9vw] max-h-40 grid gap-2 absolute z-10">
+                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 lg:w-[12.9vw]">
                   {cityNameSuggest.map((city, index) => (
                     <li
                       role="presentation"
@@ -304,7 +312,7 @@ function CarbonEmissionForm() {
                 </ul>
               </div>
             )}
-            <div className="flex flex-col items-center justify-around mb-5">
+            <div className="flex flex-col items-center w-60 mb-5">
               <label
                 htmlFor="arrival-airport"
                 className="font-bold text-center font-display text-xl mb-2 mt-4 md:mt-0"
@@ -320,7 +328,7 @@ function CarbonEmissionForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md ml-7 mt-[21vh] w-44 lg:w-[12.9vw] max-h-40 grid gap-2 absolute z-10">
+              <ul className="bg-white overflow-y-auto rounded-md mt-[21.1vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 lg:w-[12.9vw]">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -334,7 +342,7 @@ function CarbonEmissionForm() {
               </ul>
             )}
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center w-60">
               <label
                 htmlFor="numb-passengers"
                 className="font-bold text-center mb-2 font-display text-xl mt-4 md:mt-0"
@@ -351,7 +359,7 @@ function CarbonEmissionForm() {
               />
             </div>
           </form>
-          <div className="flex flex-col justify-center">
+          <div className="flex justify-center pt-10">
             <button
               type="button"
               className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 md:w-32 md:mt-10"
