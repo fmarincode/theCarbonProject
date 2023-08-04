@@ -1,12 +1,11 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 import AuthContext from "../../contexts/AuthContext";
 import earth from "../../assets/earth.png";
-import axios from "../../api/axios";
 
 function Login() {
   const { setAuth } = useContext(AuthContext);
-  const userRef = useRef();
   const errRef = useRef();
 
   const [formLogin, setFormLogin] = useState({
@@ -18,10 +17,6 @@ function Login() {
 
   const [isRotating, setIsRotating] = useState(false);
   const [formSent, setFormSent] = useState(false);
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
 
   useEffect(() => {
     setErrMsg("");
@@ -40,16 +35,9 @@ function Login() {
 
     try {
       const response = await axios.post(
-        "/login",
-        JSON.stringify({
-          email: formLogin.email,
-          pwd: formLogin.pwd,
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
+        `${import.meta.env.VITE_BACKEND_URL}/login`,
+        formLogin
       );
-      // console.log(JSON.stringify(response?.data));
 
       setAuth({
         idUser: response.data.iduser,
@@ -74,14 +62,6 @@ function Login() {
       }
       errRef.current.focus();
     }
-
-    /* fetch(`${import.meta.env.VITE_BACKEND_URL}/login`, {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formLogin)
-    }) */
   };
 
   return (
@@ -115,7 +95,6 @@ function Login() {
               <input
                 type="email"
                 id="email"
-                ref={userRef}
                 className="w-full px-4 py-2 border border-gray-300 font-bold rounded-md outline-none focus:border-indigo-500"
                 name="email"
                 value={formLogin.email}

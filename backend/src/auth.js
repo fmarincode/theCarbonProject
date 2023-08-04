@@ -40,7 +40,7 @@ const sendToken = (req, res) => {
   const token = jwt.sign({ sub: req.user.iduser }, process.env.JWT_SECRET, {
     expiresIn: "1h",
   });
-  res.cookie("token", token, { maxAge: 15 * 60 * 1000, httpOnly: true });
+  res.cookie("token", token, { maxAge: 60 * 60 * 1000, httpOnly: true });
   res.send(token);
 };
 
