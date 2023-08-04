@@ -28,6 +28,25 @@ const read = (req, res) => {
     });
 };
 
+const getUserAndNext = (req, res, next) => {
+  models.user
+    .findUserByEmailAndPwd(req.body.email)
+    .then(([rows]) => {
+      if (rows[0] == null) {
+        res.sendStatus(404);
+      } else {
+        const [foundUser] = rows;
+        req.user = foundUser;
+
+        next();
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
+
 const readByEmail = (req, res) => {
   const { email } = req.query;
   models.user
@@ -107,4 +126,5 @@ module.exports = {
   add,
   destroy,
   readByEmail,
+  getUserAndNext,
 };

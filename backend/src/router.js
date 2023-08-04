@@ -10,9 +10,16 @@ router.get("/users/:id", userControllers.read);
 router.put("/users/:id", userControllers.edit);
 router.delete("/users/:id", userControllers.destroy);
 
-const { hashPassword } = require("./auth");
+const { hashPassword, verifyPassword, sendToken } = require("./auth");
 
 router.post("/users", hashPassword, userControllers.add);
+
+router.post(
+  "/login",
+  userControllers.getUserAndNext,
+  verifyPassword,
+  sendToken
+);
 
 const flightControllers = require("./controllers/flightControllers");
 
