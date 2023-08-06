@@ -5,6 +5,25 @@ class UserManager extends AbstractManager {
     super({ table: "user" });
   }
 
+  find(iduser) {
+    return this.database.query(
+      `select iduser, firstname, email from  ${this.table} where iduser = ?`,
+      [iduser]
+    );
+  }
+
+  findUserByEmailAndPwd(email) {
+    return this.database.query(`select * from  ${this.table} where email = ?`, [
+      email,
+    ]);
+  }
+
+  findAll() {
+    return this.database.query(
+      `select iduser, firstname, email from  ${this.table}`
+    );
+  }
+
   insert(user) {
     return this.database.query(
       `insert into ${this.table} (firstname, email, hashedPassword) values (?, ?, ?)`,
@@ -16,6 +35,15 @@ class UserManager extends AbstractManager {
     return this.database.query(
       `update ${this.table} set title = ? where id = ?`,
       [user.title, user.id]
+    );
+  }
+
+  findUserById(id) {
+    return this.database.query(
+      `SELECT u.iduser, u.firstname, u.email
+    FROM ${this.table} AS u
+    WHERE u.iduser = ?;`,
+      [id]
     );
   }
 

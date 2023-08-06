@@ -26,10 +26,10 @@ class FlightManager extends AbstractManager {
     );
   }
 
-  findByUser(user) {
+  findByUser(user_iduser) {
     return this.database.query(
       `SELECT * FROM ${this.table} WHERE user_iduser = ?`,
-      [user]
+      [user_iduser]
     );
   }
 }

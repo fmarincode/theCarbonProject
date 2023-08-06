@@ -7,61 +7,80 @@ import UserContext from "../../contexts/UserContext";
 function ResumeFlight() {
   const navigate = useNavigate();
   const { firstname, userId } = useContext(UserContext);
-  const [departure, setDeparture] = useState();
-  const [arrival, setArrival] = useState();
-  const [passengers, setPassengers] = useState();
-  const [totalKgEmission, setTotalKgEmission] = useState();
+  const [departure, setDeparture] = useState([]);
+  const [arrival, setArrival] = useState([]);
+  const [passengers, setPassengers] = useState([]);
+  const [totalKgEmission, setTotalKgEmission] = useState([]);
 
   const navigateToHome = () => {
     navigate("/");
   };
 
   useEffect(() => {
-    axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/flights`, {
-        params: { user_iduser: userId },
-      })
-      .then((response) => {
-        const resultArrival = response.data[0]?.arrival; // permet de récupérer l'id si il y en a un
-        setArrival(resultArrival);
-        const resultDeparture = response.data[0]?.departure; // permet de récupérer l'id si il y en a un
-        setDeparture(resultDeparture);
-        const resultPassengers = response.data[0]?.passengers; // permet de récupérer l'id si il y en a un
-        setPassengers(resultPassengers);
-        const resultCO2 = response.data[0]?.totalKgEmission; // permet de récupérer l'id si il y en a un
-        setTotalKgEmission(resultCO2);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+    if (userId) {
+      axios
+        .get(`${import.meta.env.VITE_BACKEND_URL}/flights/${userId}`)
+        .then((response) => {
+          const newArrival = [];
+          const newDeparture = [];
+          const newPassengers = [];
+          const newTotalKgEmission = [];
+
+          for (let i = 0; i < response.data.length; i++) {
+            const flightData = response.data[i];
+            newArrival.push(flightData.arrival);
+            newDeparture.push(flightData.departure);
+            newPassengers.push(flightData.passengers);
+            newTotalKgEmission.push(flightData.totalKgEmission);
+          }
+
+          setArrival(newArrival);
+          setDeparture(newDeparture);
+          setPassengers(newPassengers);
+          setTotalKgEmission(newTotalKgEmission);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [userId]);
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="min-w-[95%] max-w-[95%] md:min-w-[65%] md:max-w-[50%] md:max-h-[40vh] md:min-h-[50vh] min-h-[72vh] bg-[#c4c589ba] flex flex-col w-full mx-3 items-center my-auto rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm">
-        <h2 className="text-[#274001] font-display flex items-center font-bold w-3/4 text-center justify-center text-2xl mb-5 mt-10">
-          {firstname}, le résumé de tes trajets
-        </h2>
-        <div className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md m-5 p-5 md:flex-row md:justify-around">
-          <p className="text-justify flex items-center mb-1 text-xl">
-            {departure} <FaPlane className="ml-2 mr-2" /> {arrival}
-          </p>
-          <p className="text-justify flex font-display items-center mb-1 text-xl">
-            {passengers} passager(s)
-          </p>
-          <p className="text-justify flex font-display items-center mb-1 text-xl">
-            {totalKgEmission}kg CO2
-          </p>
-        </div>
-        <div className="flex justify-center">
-          <button
-            type="button"
-            onClick={navigateToHome}
-            className="rounded-full hover:text-white font-bold pt-4 pb-4 pl-8 pr-8 bg-[#6C8C26] w-32 mt-10"
-          >
-            Accueil
-          </button>
-        </div>
+    <div className="flex flex-col items-center mx-3 rounded-lg">
+      <h2 className="text-[#274001] font-display flex flex-wrap items-center font-bold w-full text-center justify-center text-2xl mb-5 mt-10">
+        {firstname}, le résumé de tes trajets
+      </h2>
+      <div className="overflow-y-auto h-[50vh] flex flex-col justify-center items-center pt-32">
+        {departure.length < 1 ? (
+          <p>Tu n'as pas encore de trajets sauvegardés! </p>
+        ) : (
+          <>
+            {departure.map((cityDepart, index) => (
+              <div className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md m-5 p-5 md:flex-row md:justify-around">
+                <p className="text-justify flex items-center mb-1 text-xl">
+                  {cityDepart} <FaPlane className="ml-2 mr-2" />{" "}
+                  {arrival[index]}
+                </p>
+                <p className="text-justify flex font-display items-center mb-1 text-xl">
+                  {passengers[index]} passager(s)
+                </p>
+                <p className="text-justify flex font-display items-center mb-1 text-xl">
+                  {totalKgEmission[index]}kg CO2
+                </p>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          type="button"
+          onClick={navigateToHome}
+          className="rounded-full hover:text-white font-bold pt-4 pb-4 pl-8 pr-8 bg-[#6C8C26] w-32 mt-4"
+        >
+          Accueil
+        </button>
       </div>
     </div>
   );
