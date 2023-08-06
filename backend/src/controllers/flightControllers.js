@@ -13,9 +13,9 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  const { user_iduser } = req.query;
+  const { id } = req.params;
   models.flight
-    .findByUser(user_iduser)
+    .findByUser(id)
     .then(([result]) => {
       res.send(result);
     })

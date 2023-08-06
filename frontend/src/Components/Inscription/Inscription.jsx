@@ -1,14 +1,8 @@
 import React, { useEffect, useRef, useState, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import "./inscription.css";
-import {
-  faCheck,
-  faTimes,
-  faInfoCircle,
-} from "@fortawesome/free-solid-svg-icons";
 import { BiHelpCircle } from "react-icons/bi";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserContext from "../../contexts/UserContext";
 import FormContext from "../../contexts/FormContext";
 
@@ -27,13 +21,14 @@ const EMAIL_REGEX = /^[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,4}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function Inscription() {
-  const mailUserRef = useRef(); // ref in input
+  const firstnameRef = useRef(); // ref in input
   const errRef = useRef();
 
   const [errMsg, setErrMsg] = useState("");
 
-  const { setUserId, setFirstname } = useContext(UserContext);
-  const { formUserValues } = useContext(FormContext);
+  const { setUserId, setFirstname, userId, firstname, setIsLoggedIn } =
+    useContext(UserContext);
+  const { formUserValues, setFormUserValues } = useContext(FormContext);
 
   const [validMail, setValidMail] = useState(false);
   const [mailFocus, setMailFocus] = useState(false);
@@ -48,6 +43,8 @@ function Inscription() {
   const [isTooltipVisiblePwd, setIsTooltipVisiblePwd] = useState(false);
   const [isTooltipVisiblePwd2, setIsTooltipVisiblePwd2] = useState(false);
 
+  const [canPostFlight, setCanPostFlight] = useState(false);
+
   const navigate = useNavigate();
 
   const [formInscription, setFormInscription] = useState({
@@ -57,7 +54,12 @@ function Inscription() {
   });
 
   useEffect(() => {
-    mailUserRef.current.focus();
+    setUserId(null);
+    setFirstname(null);
+  }, []);
+
+  useEffect(() => {
+    firstnameRef.current.focus();
   }, []);
 
   useEffect(() => {
@@ -91,37 +93,65 @@ function Inscription() {
       setErrMsg("Invalid Entry");
       return;
     }
-
-    axios
-      .post(`${import.meta.env.VITE_BACKEND_URL}/users`, formInscription)
-      .then(() => {
-        setFormSent(true);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  useEffect(() => {
-    if (formSent) {
+    if (matchPwd) {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/users`, {
-          params: { email: formInscription.email },
-        })
-        .then((response) => {
-          const resultUserId = response.data[0]?.iduser; // permet de récupérer l'id si il y en a un
-          setUserId(resultUserId);
-          const resultUserFirstname = response.data[0]?.firstname; // permet de récupérer firstname si il y en a
-          setFirstname(resultUserFirstname);
+        .post(`${import.meta.env.VITE_BACKEND_URL}/users`, formInscription)
+        .then(() => {
+          setFormSent(true);
+          setIsLoggedIn(true);
         })
         .catch((err) => {
           console.error(err);
         });
-      if (formUserValues) {
-        navigate("/profil");
+    }
+  };
+
+  const postFlight = async () => {
+    if (formUserValues.user_iduser) {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/flights`,
+          formUserValues
+        );
+        setTimeout(() => {
+          navigate("/profil");
+        }, 2000);
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      navigate("/FlightFormPage");
+    }
+  };
+
+  const fetchDataUser = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URL}/users/email`,
+        {
+          params: { email: formInscription.email },
+        }
+      );
+
+      const resultUserId = response.data?.iduser;
+      setUserId(resultUserId);
+      setFormUserValues({ ...formUserValues });
+      const resultUserFirstname = response.data?.firstname;
+      setFirstname(resultUserFirstname);
+      if (formUserValues.user_iduser === null) {
+        formUserValues.user_iduser = resultUserId; // edit user_iduser with the real user id
+        postFlight();
       } else {
         navigate("/FlightFormPage");
       }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    if (formSent) {
+      fetchDataUser();
     }
   }, [formSent]);
 
@@ -166,6 +196,7 @@ function Inscription() {
           <input
             type="text"
             style={textInputStyle}
+            ref={firstnameRef}
             name="firstname"
             value={formInscription.firstname}
             onChange={handleChangeFormInscription}
@@ -193,7 +224,6 @@ function Inscription() {
           <input
             type="email"
             id="email"
-            ref={mailUserRef}
             style={textInputStyle}
             name="email"
             value={formInscription.email}
@@ -307,7 +337,9 @@ function Inscription() {
             required
           />
         </div>
-
+        <NavLink to="/login" className="hover:cursor-pointer text-center -mt-5">
+          Déjà inscrit ? Clique ici pour te connecter
+        </NavLink>
         <div className="w-full items-center flex justify-center mb-5">
           <button
             disabled={!!(!validMail || !validPwd || !validMatch)}

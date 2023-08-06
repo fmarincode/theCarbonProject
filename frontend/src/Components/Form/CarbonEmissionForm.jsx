@@ -33,7 +33,7 @@ function CarbonEmissionForm() {
   const [resultCo2, setResultCo2] = useState(); // result of carbon emission in kg
   const [resultDistance, setResultDistance] = useState(""); // result of distance between the cities in km
   const [cityNameSuggest, setCityNameSuggest] = useState([]); // array with suggestion of city depends of input value
-  const [usingApi, setUsingApi] = useState(126); // counter API calls
+  const [usingApi, setUsingApi] = useState(166); // counter API calls
   const [showSuggestDeparture, setShowSuggestDeparture] = useState(true); // show input suggest for departure
   const [showSuggestArrival, setShowSuggestArrival] = useState(true); // show input suggest for arrival
 
@@ -214,7 +214,7 @@ function CarbonEmissionForm() {
   return (
     <div>
       {showResults ? (
-        <>
+        <div className="mx-3">
           <div className="flex justify-center flex-col items-center">
             <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
               {" "}
@@ -268,12 +268,11 @@ function CarbonEmissionForm() {
               Calculer
             </button>
           </div>
-          <p>{usingApi}/200 api calls</p>
-        </>
+        </div>
       ) : (
-        <>
+        <div className="mx-3">
           <div className="flex justify-center">
-            <h2 className="text-[#274001] font-display font-bold w-full text-center text-4xl drop-shadow-lg">
+            <h2 className="text-[#274001] font-display font-bold w-full text-center text-2xl drop-shadow-lg">
               {firstname
                 ? `${firstname}, calcule l'émission de CO2 de ton trajet en avion`
                 : "Calcule l'émission de CO2 de ton trajet en avion"}
@@ -368,7 +367,8 @@ function CarbonEmissionForm() {
               Calculer
             </button>
           </div>
-        </>
+          <p>{usingApi}/200 api calls</p>
+        </div>
       )}
     </div>
   );

@@ -1,14 +1,20 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import earth from "../../assets/earth.png";
 import UserContext from "../../contexts/UserContext";
 
 function Navbar() {
-  const { userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId, setFirstname, setIsLoggedIn } =
+    useContext(UserContext);
+  const isLoggedIn = userId !== null;
 
+  const navigate = useNavigate();
   const handleLogout = (evt) => {
     evt.preventDefault();
+    setIsLoggedIn(false);
     setUserId(null);
+    setFirstname(null);
+    navigate("/");
   };
 
   return (
@@ -23,10 +29,10 @@ function Navbar() {
           <NavLink to="/FlightFormPage">Calculer</NavLink>
         </li>
         <li>
-          <NavLink to="">S'informer</NavLink>
+          <NavLink to="/profil">Profil</NavLink>
         </li>
         <li>
-          {userId ? (
+          {isLoggedIn ? (
             <NavLink to="/" onClick={handleLogout}>
               Se déconnecter
             </NavLink>

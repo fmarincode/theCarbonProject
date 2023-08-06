@@ -53,10 +53,9 @@ const readByEmail = (req, res) => {
     .findByEmail(email)
     .then(([result]) => {
       if (result.length === 0) {
-        // Modification ici
         res.sendStatus(404);
       } else {
-        res.send(result[0]); // Modification ici
+        res.send(result[0]);
       }
     })
     .catch((err) => {
