@@ -2,7 +2,7 @@ const AbstractManager = require("./AbstractManager");
 
 class FlightManager extends AbstractManager {
   constructor() {
-    super({ table: "flight" });
+    super({ table: "planeJourney" });
   }
 
   insert(flight) {

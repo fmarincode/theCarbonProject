@@ -25,21 +25,58 @@ CREATE TABLE IF NOT EXISTS `carbon_db`.`user` (
   PRIMARY KEY (`iduser`))
 ENGINE = InnoDB;
 
+INSERT INTO user (iduser, firstname, email, hashedPassword) VALUES 
+(1, "Florent", 'florent@mail.fr','$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0'),
+(2, "Arthur", 'arthur@mail.fr','$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0'),
+(3, "Lisa", 'lisa@mail.fr','$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0'),
+(4, "Marion", 'marion@mail.fr','$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0'),
+(5, "Arnaud", 'arnaud@mail.fr','$argon2id$v=19$m=65536,t=5,p=1$mjhH9dxoW9Y+TZ+H39sfXA$f/9myuRnhS+d6igPbIJ6nPGLoWl6yE1SoJlldZujZk0');
 
 -- -----------------------------------------------------
--- Table `carbon_db`.`flight`
+-- Table `carbon_db`.`planeJourney`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `carbon_db`.`flight` (
-  `idflight` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `carbon_db`.`planeJourney` (
+  `idPlaneJourney` INT NOT NULL AUTO_INCREMENT,
   `departure` VARCHAR(100) NOT NULL,
   `arrival` VARCHAR(100) NOT NULL,
   `passengers` INT NOT NULL,
   `totalKgEmission` INT NOT NULL,
   `kmDistance` INT NOT NULL,
   `user_iduser` INT NOT NULL,
-  PRIMARY KEY (`idflight`, `user_iduser`),
-  INDEX `fk_flight_user_idx` (`user_iduser` ASC) VISIBLE,
-  CONSTRAINT `fk_flight_user`
+  PRIMARY KEY (`idPlaneJourney`, `user_iduser`),
+  INDEX `fk_planeJourney_user_idx` (`user_iduser` ASC) VISIBLE,
+  CONSTRAINT `fk_planeJourney_user`
+    FOREIGN KEY (`user_iduser`)
+    REFERENCES `carbon_db`.`user` (`iduser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+INSERT INTO planeJourney (idPlaneJourney, departure, arrival, passengers, totalKgEmission, kmDistance, user_iduser) VALUES 
+(1, "paris", "marseille", 1, 123, 775, 1),
+(2, "paris", "madrid", 1, 171, 1155, 2),
+(3, "paris", "venice", 2, 343, 973, 3),
+(4, "marseille", "venice", 2, 108, 710, 4),
+(5, "paris", "casablanca", 2, 594, 2022, 5),
+(6, "paris", "zagreb", 2, 470, 1217, 1),
+(7, "paris", "venice", 2, 343, 973, 1),
+(5, "paris", "casablanca", 2, 594, 2022, 1);
+
+
+-- -----------------------------------------------------
+-- Table `carbon_db`.`carJourney`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `carbon_db`.`carJourney` (
+  `idCarJourney` INT NOT NULL AUTO_INCREMENT,
+  `departure` VARCHAR(100) NOT NULL,
+  `arrival` VARCHAR(100) NOT NULL,
+  `passengers` INT NOT NULL,
+  `totalKgEmission` INT NOT NULL,
+  `kmDistance` INT NOT NULL,
+  `user_iduser` INT NOT NULL,
+  PRIMARY KEY (`idCarJourney`, `user_iduser`),
+  INDEX `fk_carJourney_user_idx` (`user_iduser` ASC) VISIBLE,
+  CONSTRAINT `fk_carJourney_user`
     FOREIGN KEY (`user_iduser`)
     REFERENCES `carbon_db`.`user` (`iduser`)
     ON DELETE NO ACTION

@@ -50,7 +50,7 @@ function ResumeFlight() {
       <h2 className="text-[#274001] font-display flex flex-wrap items-center font-bold w-full text-center justify-center text-2xl mb-5 mt-10">
         {firstname}, le résumé de tes trajets
       </h2>
-      <div className="overflow-y-auto h-[50vh] flex flex-col justify-center items-center pt-32">
+      <div className="overflow-y-auto h-[50vh] flex flex-col justify-center items-center pt-60">
         {departure.length < 1 ? (
           <p>Tu n'as pas encore de trajets sauvegardés! </p>
         ) : (
