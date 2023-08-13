@@ -29,4 +29,12 @@ router.put("/flights/:id", flightControllers.edit);
 router.post("/flights", flightControllers.add);
 router.delete("/flights/:id", flightControllers.destroy);
 
+const carControllers = require("./controllers/carControllers");
+
+router.get("/cars", carControllers.browse);
+router.get("/cars/:id", carControllers.read);
+router.put("/cars/:id", carControllers.edit);
+router.post("/cars", carControllers.add);
+router.delete("/cars/:id", carControllers.destroy);
+
 module.exports = router;

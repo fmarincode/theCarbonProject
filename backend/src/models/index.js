@@ -39,6 +39,11 @@ const FlightManager = require("./FlightManager");
 models.flight = new FlightManager();
 models.flight.setDatabase(pool);
 
+const CarManager = require("./CarManager");
+
+models.car = new CarManager();
+models.car.setDatabase(pool);
+
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
 
