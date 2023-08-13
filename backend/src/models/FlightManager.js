@@ -32,6 +32,13 @@ class FlightManager extends AbstractManager {
       [user_iduser]
     );
   }
+
+  delete(idPlaneJourney) {
+    return this.database.query(
+      `delete from ${this.table} where idPlaneJourney = ?`,
+      [idPlaneJourney]
+    );
+  }
 }
 
 module.exports = FlightManager;
