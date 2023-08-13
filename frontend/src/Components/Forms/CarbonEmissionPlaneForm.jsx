@@ -17,7 +17,7 @@ const textInputStyle = {
   fontWeight: "bold",
 };
 
-function CarbonEmissionForm() {
+function CarbonEmissionPlaneForm() {
   const navigate = useNavigate();
 
   const { userId, firstname } = useContext(UserContext);
@@ -358,7 +358,14 @@ function CarbonEmissionForm() {
               />
             </div>
           </form>
-          <div className="flex justify-center pt-10">
+          <div className="flex justify-around pt-10">
+            <button
+              type="button"
+              className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 md:w-32 md:mt-10"
+              onClick={() => navigate("/choose")}
+            >
+              Retour
+            </button>
             <button
               type="button"
               className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 md:w-32 md:mt-10"
@@ -374,4 +381,4 @@ function CarbonEmissionForm() {
   );
 }
 
-export default CarbonEmissionForm;
+export default CarbonEmissionPlaneForm;

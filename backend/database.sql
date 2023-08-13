@@ -70,7 +70,6 @@ CREATE TABLE IF NOT EXISTS `carbon_db`.`carJourney` (
   `idCarJourney` INT NOT NULL AUTO_INCREMENT,
   `departure` VARCHAR(100) NOT NULL,
   `arrival` VARCHAR(100) NOT NULL,
-  `passengers` INT NOT NULL,
   `totalKgEmission` INT NOT NULL,
   `kmDistance` INT NOT NULL,
   `user_iduser` INT NOT NULL,
