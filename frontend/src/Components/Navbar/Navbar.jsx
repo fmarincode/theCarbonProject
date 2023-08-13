@@ -26,7 +26,7 @@ function Navbar() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/FlightFormPage">Calculer</NavLink>
+          <NavLink to="/choose">Calculer</NavLink>
         </li>
         <li>
           <NavLink to="/profil">Profil</NavLink>
