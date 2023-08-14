@@ -56,7 +56,10 @@ function ResumeFlight() {
         ) : (
           <>
             {departure.map((cityDepart, index) => (
-              <div className="flex flex-col items-center w-3/4 relative top-24 bg-[#D9D7C5] rounded-md m-5 p-5 md:flex-row md:justify-around">
+              <div
+                key={index}
+                className="flex flex-col items-center w-3/4 relative top-24 bg-[#D9D7C5] rounded-md m-5 p-5 md:flex-row md:justify-around"
+              >
                 <p className="text-justify flex items-center mb-1 text-xl">
                   {cityDepart} <FaPlane className="ml-2 mr-2" />{" "}
                   {arrival[index]}
