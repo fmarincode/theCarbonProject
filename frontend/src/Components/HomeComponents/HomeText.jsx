@@ -5,7 +5,7 @@ function HomeText() {
   const navigate = useNavigate();
 
   const toFormBtn = () => {
-    navigate("/choose");
+    navigate("/FlightFormPage");
   };
 
   return (
