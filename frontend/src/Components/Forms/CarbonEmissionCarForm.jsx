@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
+import FormContext from "../../contexts/FormContext";
 
 const textInputStyle = {
   width: "75%",
@@ -15,7 +16,8 @@ const textInputStyle = {
 };
 
 function CarbonEmissionCarForm() {
-  const { firstname } = useContext(UserContext);
+  const { userId, firstname } = useContext(UserContext);
+  const { setFormUserValues } = useContext(FormContext);
   const navigate = useNavigate();
 
   const apiCarbonKey = "Ep1z5WxRJGFHfQ0u3mBg";
@@ -24,6 +26,7 @@ function CarbonEmissionCarForm() {
   const [suggestBrandCar, setSuggestBrandCar] = useState([]);
   const [brandCar, setBrandCar] = useState("");
   const [brandId, setBrandId] = useState("");
+  const [vehicleId, setVehicleId] = useState("");
   const [modelCar, setModelCar] = useState("");
   const [suggestModel, setSuggestModel] = useState([]);
   const [displayModelInput, setDisplayModelInput] = useState(false);
@@ -84,9 +87,11 @@ function CarbonEmissionCarForm() {
 
         response.data.forEach((item) => {
           const modelName = item.data.attributes.name;
-          if (!seenModelNames.has(modelName)) {
+          const modelYear = item.data.attributes.year;
+          const modelData = `${modelName} ${modelYear}`; // Crée une clé unique en combinant le nom et l'année
+          if (!seenModelNames.has(modelData)) {
             // si seenModelNames n'a pas déjà le model name en cours
-            seenModelNames.add(modelName); // ajoute le
+            seenModelNames.add(modelData); // ajoute le
             uniqueModels.push({
               // et ajoute le dans le tableau unique model
               name: modelName,
@@ -142,7 +147,34 @@ function CarbonEmissionCarForm() {
     }
   }, [brandId, displayModelInput]);
 
-  const estimateCarsCO2 = (distanceValue, vehicleId) => {
+  useEffect(() => {
+    if (modelCar) {
+      const [modelName, modelYear] = modelCar.split("_"); // Sépare le nom et l'année
+      axios
+        .get(
+          `https:///www.carboninterface.com/api/v1/vehicle_makes/${brandId}/vehicle_models`,
+          {
+            headers: {
+              Authorization: `Bearer ${apiCarbonKey}`,
+            },
+          }
+        )
+        .then((response) => {
+          if (response.data && response.data.length > 0) {
+            const matchCar = response.data.find(
+              (item) =>
+                item.data.attributes.name === modelName &&
+                item.data.attributes.year === parseInt(modelYear, 10) // Convertit modelYear en nombre
+            );
+            if (matchCar) {
+              setVehicleId(matchCar.data.id);
+            }
+          }
+        });
+    }
+  }, [modelCar]);
+
+  const estimateCarsCO2 = (distanceValue) => {
     fetch("https://www.carboninterface.com/api/v1/estimates", {
       method: "POST",
       headers: {
@@ -153,9 +185,26 @@ function CarbonEmissionCarForm() {
         type: "vehicle",
         distance_unit: "km",
         distance_value: distanceValue,
-        vehicle_model_id: "7268a9b7-17e8-4c8d-acca-57059252afe9", // variable vehicleId
+        vehicle_model_id: vehicleId,
       }),
-    });
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setFormUserValues(data); // dans le cas où user pas login
+
+        axios
+          .post(`${import.meta.env.VITE_BACKEND_URL}/cars`, {
+            departure: formToFindDistance.from,
+            arrival: formToFindDistance.to,
+            totalKgEmission: data.data.attributes.carbon_kg,
+            kmDistance: distanceValue,
+            user_iduser: userId,
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      })
+      .catch((error) => console.error(error));
   };
 
   const handleClickCalcul = async (event) => {
@@ -170,6 +219,8 @@ function CarbonEmissionCarForm() {
     } catch (err) {
       console.error(err);
     }
+
+    navigate("/profil");
   };
 
   return (
@@ -265,7 +316,7 @@ function CarbonEmissionCarForm() {
                 .map((modelData, index) => (
                   <option
                     key={index}
-                    value={modelData.name}
+                    value={`${modelData.name}_${modelData.years[0]}`} // Utilisez la première année
                     className="py-2 text-gray-800 hover:bg-blue-300 hover:text-white"
                   >
                     {modelData.name} ({modelData.years.join(", ")})

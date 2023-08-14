@@ -90,7 +90,7 @@ INSERT INTO carJourney (idCarJourney, departure, arrival, totalKgEmission, kmDis
 (5, "paris", "casablanca", 1, 2328, 5),
 (6, "paris", "zagreb", 1, 1392, 1),
 (7, "paris", "venice", 1, 1114, 1),
-(5, "paris", "casablanca", 1, 2328, 1);
+(8, "paris", "casablanca", 1, 2328, 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
