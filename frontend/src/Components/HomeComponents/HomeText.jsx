@@ -9,8 +9,8 @@ function HomeText() {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-5 min-h-[55.5vh] md:space-y-10">
-      <p className="text-[#242422] text-justify px-5 md:pr-10 md:pl-10 font-bold text-lg drop-shadow-lg">
+    <div className="flex flex-col items-center space-y-5 min-h-[55.5vh]">
+      <p className="text-[#242422] text-justify px-5 font-bold text-lg drop-shadow-lg">
         Bonjour, si tu es arrivé jusqu'ici c'est que notre ami Google fait très
         bien son boulot. Maintenant que tu es là, grâce à l'API de
         <a
@@ -31,7 +31,7 @@ function HomeText() {
       <div>
         <button
           type="button"
-          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 mt-5 mb-5 md:w-32 md:relative md:bottom-14 "
+          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 mt-5 mb-5 md:w-32"
           onClick={toFormBtn}
         >
           Calculer

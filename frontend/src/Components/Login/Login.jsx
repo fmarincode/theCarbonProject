@@ -90,15 +90,9 @@ function Login() {
           console.error(err);
         });
 
-      if (formUserValues) {
-        setTimeout(() => {
-          navigate("/profil");
-        }, 3000);
-      } else {
-        setTimeout(() => {
-          navigate("/");
-        }, 3000);
-      }
+      setTimeout(() => {
+        navigate("/userprofil");
+      }, 3000);
     }
   }, [success]);
 
@@ -111,11 +105,8 @@ function Login() {
       >
         {errMsg}
       </p>
-      <form
-        className="flex flex-col w-3/4 md:flex-row md:w-full md:flex-wrap md:justify-around"
-        onSubmit={submitAuthent}
-      >
-        <div className="flex flex-col  items-center mb-5">
+      <form className="flex flex-col w-3/4" onSubmit={submitAuthent}>
+        <div className="flex flex-col items-center mb-5">
           <label
             htmlFor="email"
             className="font-bold font-display text-xl text-center mb-2"
@@ -125,7 +116,7 @@ function Login() {
           <input
             type="email"
             id="email"
-            className="w-full px-4 py-2 border border-gray-300 font-bold rounded-md outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 font-bold rounded-md outline-none focus:border-indigo-500 md:w-[30%]"
             name="email"
             value={formLogin.email}
             onChange={handleChangeFormLogin}
@@ -145,11 +136,14 @@ function Login() {
             name="pwd"
             value={formLogin.pwd}
             onChange={handleChangeFormLogin}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md font-bold outline-none focus:border-indigo-500"
+            className="w-full px-4 py-2 border border-gray-300 rounded-md font-bold outline-none focus:border-indigo-500 md:w-[30%]"
             required
           />
         </div>
-        <NavLink to="/inscription" className="hover:cursor-pointer text-center">
+        <NavLink
+          to="/inscription"
+          className="hover:cursor-pointer text-center font-bold font-display"
+        >
           Pas encore inscrit ? Clique ici pour t'inscrire
         </NavLink>
         <div className="w-full items-center flex justify-center mb-5">
