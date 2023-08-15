@@ -83,14 +83,16 @@ CREATE TABLE IF NOT EXISTS `carbon_db`.`carJourney` (
 ENGINE = InnoDB;
 
 INSERT INTO carJourney (idCarJourney, departure, arrival, totalKgEmission, kmDistance, user_iduser) VALUES 
-(1, "paris", "marseille", 1, 776, 1),
-(2, "paris", "madrid", 1, 1270, 2),
-(3, "paris", "venice", 1, 1114, 3),
-(4, "marseille", "venice", 1, 776, 4),
-(5, "paris", "casablanca", 1, 2328, 5),
-(6, "paris", "zagreb", 1, 1392, 1),
-(7, "paris", "venice", 1, 1114, 1),
-(8, "paris", "casablanca", 1, 2328, 1);
+(1, "paris", "madrid", 231, 1270, 1),
+(2, "paris", "lille", 54, 225, 1),
+(3, "paris", "lille", 54, 225, 2),
+(4, "paris", "madrid", 231, 1270, 3),
+(5, "paris", "madrid", 231, 1270, 2),
+(6, "madrid", "paris", 231, 1270, 1),
+(7, "madrid", "paris", 231, 1270, 1),
+(8, "madrid", "paris", 231, 1270, 1),
+(9, "madrid", "paris", 231, 1270, 1),
+(10, "madrid", "paris", 231, 1270, 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

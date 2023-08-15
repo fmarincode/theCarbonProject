@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { FaPlane } from "react-icons/fa";
+import { AiFillCar } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
@@ -9,7 +9,6 @@ function ResumeFlight() {
   const { firstname, userId } = useContext(UserContext);
   const [departure, setDeparture] = useState([]);
   const [arrival, setArrival] = useState([]);
-  const [passengers, setPassengers] = useState([]);
   const [totalKgEmission, setTotalKgEmission] = useState([]);
 
   const navigateToHome = () => {
@@ -19,24 +18,21 @@ function ResumeFlight() {
   useEffect(() => {
     if (userId) {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/flights/${userId}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/cars/${userId}`)
         .then((response) => {
           const newArrival = [];
           const newDeparture = [];
-          const newPassengers = [];
           const newTotalKgEmission = [];
 
           for (let i = 0; i < response.data.length; i++) {
-            const flightData = response.data[i];
-            newArrival.push(flightData.arrival);
-            newDeparture.push(flightData.departure);
-            newPassengers.push(flightData.passengers);
-            newTotalKgEmission.push(flightData.totalKgEmission);
+            const carData = response.data[i];
+            newArrival.push(carData.arrival);
+            newDeparture.push(carData.departure);
+            newTotalKgEmission.push(carData.totalKgEmission);
           }
 
           setArrival(newArrival);
           setDeparture(newDeparture);
-          setPassengers(newPassengers);
           setTotalKgEmission(newTotalKgEmission);
         })
         .catch((err) => {
@@ -52,7 +48,7 @@ function ResumeFlight() {
           ? `${firstname}, le résumé de tes trajets`
           : "Le résumé des trajets"}
       </h2>
-      <div className="overflow-y-auto h-[48vh] flex flex-col items-center">
+      <div className="overflow-y-auto h-[48vh] flex flex-col justify-center items-center">
         {departure.length < 1 ? (
           <p className=" font-display text-2xl text-center">
             Tu n'as pas encore de trajets sauvegardés !{" "}
@@ -65,11 +61,8 @@ function ResumeFlight() {
                 className="flex flex-col items-center w-3/4 bg-[#D9D7C5] rounded-md mx-5 mb-4 p-5 md:flex-row md:justify-around"
               >
                 <p className="text-justify flex items-center mb-1 text-xl">
-                  {cityDepart} <FaPlane className="ml-2 mr-2" />{" "}
+                  {cityDepart} <AiFillCar className="ml-2 mr-2" />{" "}
                   {arrival[index]}
-                </p>
-                <p className="text-justify flex font-display items-center mb-1 text-xl">
-                  {passengers[index]} passager(s)
                 </p>
                 <p className="text-justify flex font-display items-center mb-1 text-xl">
                   {totalKgEmission[index]}kg CO2

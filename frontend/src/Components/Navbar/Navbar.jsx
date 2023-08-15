@@ -30,7 +30,7 @@ function Navbar() {
           <NavLink to="/FlightFormPage">Calculer</NavLink>
         </li>
         <li>
-          <NavLink to="/profil">Profil</NavLink>
+          <NavLink to="/flightprofil">Profil</NavLink>
         </li>
         <li>
           {isLoggedIn ? (
