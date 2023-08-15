@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import FormContext from "../../contexts/FormContext";
-import earth from "../../assets/earth.png";
+import earth from "../../assets/earth_colorIN3.png";
 
 function Login() {
   const { setUserId, setFirstname, firstname, userId, setIsLoggedIn } =
@@ -155,9 +155,7 @@ function Login() {
         <div className="w-full items-center flex justify-center mb-5">
           <button
             type="submit"
-            className={`rounded-full hover:text-white font-bold py-2 px-8 w-32 mt-5 mb-5 ${
-              formSent ? "bg-[#8A8C46]" : "bg-[#6C8C26]"
-            }`}
+            className="rounded-full hover:text-white font-bold py-2 px-8 w-32 mt-5 mb-5 bg-[#274001d8] text-[#EEF279]"
           >
             Valider
           </button>

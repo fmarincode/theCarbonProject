@@ -80,7 +80,7 @@ function ResumeFlight() {
         <button
           type="button"
           onClick={navigateToHome}
-          className="rounded-full hover:text-white font-bold pt-4 pb-4 pl-8 pr-8 bg-[#6C8C26] w-32 mt-4"
+          className="rounded-full hover:text-white font-bold pt-4 pb-4 pl-8 pr-8 bg-[#274001d8] text-[#EEF279] w-32 mt-4"
         >
           Accueil
         </button>

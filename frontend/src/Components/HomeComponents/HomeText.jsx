@@ -31,7 +31,7 @@ function HomeText() {
       <div>
         <button
           type="button"
-          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#6C8C26] w-28 mt-5 mb-5 md:w-32 md:relative md:bottom-14 "
+          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 mt-5 mb-5 md:w-32 md:relative md:bottom-14 "
           onClick={toFormBtn}
         >
           Calculer
