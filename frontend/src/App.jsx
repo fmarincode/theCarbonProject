@@ -26,7 +26,7 @@ function App() {
             <Route path="/CarFormPage" element={<CarFormPage />} />
             <Route path="/inscription" element={<InscriptionPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/profil" element={<UserProfil />} />
+            <Route path="/userprofil" element={<UserProfil />} />
           </Routes>
         </FormProvider>
       </UserProvider>
