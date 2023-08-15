@@ -2,18 +2,17 @@ import React, { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IataCode } from "../../services/IataCode";
-import "./CarbonEmissionForm.css";
 import UserContext from "../../contexts/UserContext";
 import FormContext from "../../contexts/FormContext";
 
 const textInputStyle = {
   width: "75%",
   padding: "5px 10px",
-  border: "none",
   borderBottom: "1px solid #645979",
   outline: "none",
   borderRadius: "5px",
-  fontSize: "1rem",
+  fontSize: "1.25rem",
+  lineHeight: "1.75rem",
   fontWeight: "bold",
 };
 
@@ -33,7 +32,6 @@ function CarbonEmissionPlaneForm() {
   const [resultCo2, setResultCo2] = useState(); // result of carbon emission in kg
   const [resultDistance, setResultDistance] = useState(""); // result of distance between the cities in km
   const [cityNameSuggest, setCityNameSuggest] = useState([]); // array with suggestion of city depends of input value
-  const [usingApi, setUsingApi] = useState(166); // counter API calls
   const [showSuggestDeparture, setShowSuggestDeparture] = useState(true); // show input suggest for departure
   const [showSuggestArrival, setShowSuggestArrival] = useState(true); // show input suggest for arrival
 
@@ -171,7 +169,6 @@ function CarbonEmissionPlaneForm() {
         // console.log(arrivalAirport);
         setResultCo2(dataResult.data.attributes.carbon_kg);
         setResultDistance(dataResult.data.attributes.distance_value);
-        setUsingApi(usingApi + 1);
         setshowResults(true);
       })
       .catch((error) => console.error(error));
@@ -195,7 +192,7 @@ function CarbonEmissionPlaneForm() {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/flights`, formTravel)
         .then(() => {
-          navigate("/profil");
+          navigate("/userprofil");
         })
         .catch((err) => {
           console.error(err);
@@ -279,17 +276,17 @@ function CarbonEmissionPlaneForm() {
             </h2>
           </div>
 
-          <form className="flex flex-col items-center pt-10 md:flex-row md:w-full md:flex-wrap md:justify-around ">
-            <div className="flex flex-col items-center w-60 mb-5">
+          <form className="flex flex-col items-center pt-10 md:flex-row md:w-full md:mt-10">
+            <div className="flex flex-col items-center w-60 mb-5 md:mr-10">
               <label
                 htmlFor="departure-airport"
-                className="font-bold  font-display text-center text-xl mb-2"
+                className="font-bold font-display text-center text-xl mb-2"
               >
                 Aéroport de départ
               </label>
               <input
                 type="search"
-                style={textInputStyle}
+                className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%]"
                 value={userInputDepartureAirport}
                 onChange={handleDeparture}
               />
@@ -297,7 +294,7 @@ function CarbonEmissionPlaneForm() {
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
               <div className="relative">
-                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 lg:w-[12.9vw]">
+                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:-ml-[11.6vw] md:mt-[2.3vh]  md:no-scrollbar">
                   {cityNameSuggest.map((city, index) => (
                     <li
                       role="presentation"
@@ -311,7 +308,7 @@ function CarbonEmissionPlaneForm() {
                 </ul>
               </div>
             )}
-            <div className="flex flex-col items-center w-60 mb-5">
+            <div className="flex flex-col items-center w-60 mb-5 md:mr-3">
               <label
                 htmlFor="arrival-airport"
                 className="font-bold text-center font-display text-xl mb-2 mt-4 md:mt-0"
@@ -320,14 +317,14 @@ function CarbonEmissionPlaneForm() {
               </label>
               <input
                 type="search"
-                style={textInputStyle}
+                className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%]"
                 value={userInputArrivalAirport}
                 onChange={handleArrival}
               />
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md mt-[21.1vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 lg:w-[12.9vw]">
+              <ul className="bg-white overflow-y-auto rounded-md mt-[21.1vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:ml-[11.6vw] md:mt-[18vh] md:no-scrollbar">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -341,12 +338,12 @@ function CarbonEmissionPlaneForm() {
               </ul>
             )}
 
-            <div className="flex flex-col items-center w-60">
+            <div className="flex flex-col items-center w-60 md:mb-5">
               <label
                 htmlFor="numb-passengers"
                 className="font-bold text-center mb-2 font-display text-xl mt-4 md:mt-0"
               >
-                Nombre de passagers{" "}
+                Nombre de passagers
               </label>
               <input
                 type="number"
@@ -358,10 +355,10 @@ function CarbonEmissionPlaneForm() {
               />
             </div>
           </form>
-          <div className="flex justify-around pt-10">
+          <div className="flex justify-around pt-10 md:pt-8 md:justify-center">
             <button
               type="button"
-              className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10"
+              className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
               onClick={() => navigate("/choose")}
             >
               Retour

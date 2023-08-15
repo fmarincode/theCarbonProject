@@ -82,13 +82,22 @@ function ResumeFlight() {
         >
           Accueil
         </button>
-        {!userId && (
+
+        {!userId ? (
           <button
             type="button"
             onClick={() => navigate("/login")}
             className="rounded-full hover:text-white font-bold bg-[#274001d8] text-[#EEF279] w-32 mt-4"
           >
             Se connecter
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={() => navigate("/CarFormPage")}
+            className="rounded-full hover:text-white font-bold bg-[#274001d8] text-[#EEF279] w-32 mt-4"
+          >
+            Calculer
           </button>
         )}
       </div>
