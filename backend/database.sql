@@ -60,7 +60,9 @@ INSERT INTO planeJourney (idPlaneJourney, departure, arrival, passengers, totalK
 (5, "paris", "casablanca", 2, 594, 2022, 5),
 (6, "paris", "zagreb", 2, 470, 1217, 1),
 (7, "paris", "venice", 2, 343, 973, 1),
-(5, "paris", "casablanca", 2, 594, 2022, 1);
+(8, "paris", "casablanca", 2, 594, 2022, 1),
+(9, "casablanca", "paris", 2, 594, 2022, 1),
+(10, "venice", "paris", 2, 343, 973, 1);
 
 
 -- -----------------------------------------------------
