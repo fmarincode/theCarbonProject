@@ -33,7 +33,6 @@ function CarbonEmissionPlaneForm() {
   const [resultCo2, setResultCo2] = useState(); // result of carbon emission in kg
   const [resultDistance, setResultDistance] = useState(""); // result of distance between the cities in km
   const [cityNameSuggest, setCityNameSuggest] = useState([]); // array with suggestion of city depends of input value
-  const [usingApi, setUsingApi] = useState(166); // counter API calls
   const [showSuggestDeparture, setShowSuggestDeparture] = useState(true); // show input suggest for departure
   const [showSuggestArrival, setShowSuggestArrival] = useState(true); // show input suggest for arrival
 
@@ -171,7 +170,6 @@ function CarbonEmissionPlaneForm() {
         // console.log(arrivalAirport);
         setResultCo2(dataResult.data.attributes.carbon_kg);
         setResultDistance(dataResult.data.attributes.distance_value);
-        setUsingApi(usingApi + 1);
         setshowResults(true);
       })
       .catch((error) => console.error(error));
@@ -195,7 +193,7 @@ function CarbonEmissionPlaneForm() {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/flights`, formTravel)
         .then(() => {
-          navigate("/profil");
+          navigate("/userprofil");
         })
         .catch((err) => {
           console.error(err);

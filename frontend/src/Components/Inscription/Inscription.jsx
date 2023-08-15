@@ -106,15 +106,27 @@ function Inscription() {
     }
   };
 
-  const postFlight = async () => {
-    if (formUserValues.user_iduser) {
+  const postJourney = async () => {
+    if (formUserValues.user_iduser && formUserValues.passengers) {
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_BACKEND_URL}/flights`,
           formUserValues
         );
         setTimeout(() => {
-          navigate("/profil");
+          navigate("/userprofil");
+        }, 2000);
+      } catch (err) {
+        console.error(err);
+      }
+    } else if (formUserValues.user_iduser) {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/cars`,
+          formUserValues
+        );
+        setTimeout(() => {
+          navigate("/userprofil");
         }, 2000);
       } catch (err) {
         console.error(err);
@@ -140,7 +152,7 @@ function Inscription() {
       setFirstname(resultUserFirstname);
       if (formUserValues.user_iduser === null) {
         formUserValues.user_iduser = resultUserId; // edit user_iduser with the real user id
-        postFlight();
+        postJourney();
       } else {
         navigate("/FlightFormPage");
       }

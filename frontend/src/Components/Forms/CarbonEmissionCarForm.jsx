@@ -190,19 +190,27 @@ function CarbonEmissionCarForm() {
     })
       .then((response) => response.json())
       .then((data) => {
-        setFormUserValues(data); // dans le cas où user pas login
-
-        axios
-          .post(`${import.meta.env.VITE_BACKEND_URL}/cars`, {
+        if (userId) {
+          axios
+            .post(`${import.meta.env.VITE_BACKEND_URL}/cars`, {
+              departure: formToFindDistance.from,
+              arrival: formToFindDistance.to,
+              totalKgEmission: data.data.attributes.carbon_kg,
+              kmDistance: distanceValue,
+              user_iduser: userId,
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        } else {
+          setFormUserValues({
             departure: formToFindDistance.from,
             arrival: formToFindDistance.to,
             totalKgEmission: data.data.attributes.carbon_kg,
             kmDistance: distanceValue,
             user_iduser: userId,
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+          }); // dans le cas où user pas login
+        }
       })
       .catch((error) => console.error(error));
   };
@@ -219,8 +227,11 @@ function CarbonEmissionCarForm() {
     } catch (err) {
       console.error(err);
     }
-
-    navigate("/profil");
+    if (userId) {
+      navigate("/userprofil");
+    } else {
+      navigate("/inscription");
+    }
   };
 
   return (

@@ -92,7 +92,7 @@ function Login() {
 
       if (formUserValues) {
         setTimeout(() => {
-          navigate("/profil");
+          navigate("/userprofil");
         }, 3000);
       } else {
         setTimeout(() => {
