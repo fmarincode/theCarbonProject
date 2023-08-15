@@ -5,8 +5,7 @@ import { UserProvider } from "./contexts/UserContext";
 import { FormProvider } from "./contexts/FormContext";
 import HomePage from "./pages/HomePage";
 import InscriptionPage from "./pages/InscriptionPage";
-import UserFlightProfil from "./pages/UserFlightProfil";
-import UserCarProfil from "./pages/UserCarProfil";
+import UserProfil from "./pages/UserProfil";
 import background from "./assets/kazuend-19SC2oaVZW0-unsplash.jpg";
 import Navbar from "./Components/Navbar/Navbar";
 import LoginPage from "./pages/LoginPage";
@@ -27,8 +26,7 @@ function App() {
             <Route path="/CarFormPage" element={<CarFormPage />} />
             <Route path="/inscription" element={<InscriptionPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/flightprofil" element={<UserFlightProfil />} />
-            <Route path="/carprofil" element={<UserCarProfil />} />
+            <Route path="/userprofil" element={<UserProfil />} />
           </Routes>
         </FormProvider>
       </UserProvider>

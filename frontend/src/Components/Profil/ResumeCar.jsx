@@ -48,10 +48,10 @@ function ResumeFlight() {
           ? `${firstname}, le résumé de tes trajets`
           : "Le résumé des trajets"}
       </h2>
-      <div className="overflow-y-auto h-[48vh] flex flex-col justify-center items-center">
-        {departure.length < 1 ? (
+      <div className="overflow-y-auto h-[48vh] flex flex-col items-center">
+        {!userId && departure.length < 1 ? (
           <p className=" font-display text-2xl text-center">
-            Tu n'as pas encore de trajets sauvegardés !{" "}
+            Tu n'as pas encore de trajets sauvegardés !
           </p>
         ) : (
           <>
