@@ -359,7 +359,7 @@ function CarbonEmissionPlaneForm() {
             <button
               type="button"
               className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
-              onClick={() => navigate("/choose")}
+              onClick={() => navigate("/")}
             >
               Retour
             </button>

@@ -233,17 +233,17 @@ function CarbonEmissionCarForm() {
         </h2>
       </div>
 
-      <form className="flex flex-col items-center pt-7 md:flex-row md:w-full md:flex-wrap md:justify-around ">
-        <div className="flex flex-col items-center w-60 mb-3">
+      <form className="flex flex-col items-center pt-7 md:flex-row md:w-full md:mt-10">
+        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
           <label
             htmlFor="departure-airport"
-            className="font-bold  font-display text-center text-xl mt-2 mb-2"
+            className="font-bold  font-display text-center text-xl mt-2 mb-2 md:mt-0"
           >
             Ville de départ
           </label>
           <input
             type="search"
-            style={textInputStyle}
+            className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%]"
             name="from"
             value={formToFindDistance.from}
             onChange={handleChangeToFindDistance}
@@ -251,7 +251,7 @@ function CarbonEmissionCarForm() {
           />
         </div>
 
-        <div className="flex flex-col items-center w-60 mb-3">
+        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
           <label
             htmlFor="arrival-airport"
             className="font-bold text-center font-display text-xl mt-2 mb-2 md:mt-0"
@@ -260,7 +260,7 @@ function CarbonEmissionCarForm() {
           </label>
           <input
             type="search"
-            style={textInputStyle}
+            className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%]"
             name="to"
             value={formToFindDistance.to}
             onChange={handleChangeToFindDistance}
@@ -268,7 +268,7 @@ function CarbonEmissionCarForm() {
           />
         </div>
 
-        <div className="flex flex-col items-center w-60 mb-3">
+        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
           <label
             htmlFor="brandCar"
             className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
@@ -277,7 +277,7 @@ function CarbonEmissionCarForm() {
           </label>
           <select
             id="brandCar"
-            style={textInputStyle}
+            className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%] "
             onChange={(e) => setBrandCar(e.target.value)}
           >
             <option value="">Sélectionnez</option>
@@ -285,11 +285,7 @@ function CarbonEmissionCarForm() {
               .slice()
               .sort()
               .map((brand, index) => (
-                <option
-                  key={index}
-                  value={brand}
-                  className="py-2 text-gray-800 hover:bg-blue-300 hover:text-white"
-                >
+                <option key={index} value={brand} className="py-2">
                   {brand}
                 </option>
               ))}
@@ -297,7 +293,7 @@ function CarbonEmissionCarForm() {
         </div>
 
         {displayModelInput && (
-          <div className="flex flex-col items-center w-60 mb-3">
+          <div className="flex flex-col items-center w-60 mb-3 ">
             <label
               htmlFor="modelCar"
               className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
@@ -306,7 +302,7 @@ function CarbonEmissionCarForm() {
             </label>
             <select
               id="modelCar"
-              style={textInputStyle}
+              className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%] "
               onChange={(e) => setModelCar(e.target.value)}
             >
               <option value="">Sélectionnez</option>
@@ -326,11 +322,11 @@ function CarbonEmissionCarForm() {
           </div>
         )}
       </form>
-      <div className="flex justify-around pt-5">
+      <div className="flex justify-around pt-10 md:pt-8 md:justify-center">
         <button
           type="button"
-          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10"
-          onClick={() => navigate("/choose")}
+          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
+          onClick={() => navigate("/")}
         >
           Retour
         </button>
