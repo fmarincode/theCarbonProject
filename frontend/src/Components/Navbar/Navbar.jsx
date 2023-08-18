@@ -22,7 +22,7 @@ function Navbar() {
       <ul className="flex justify-around items-center h-full md:text-xl">
         <li>
           <NavLink to="/">
-            <img src={earth} alt="earth" className="h-8 md:h-12" />
+            <img src={earth} alt="earth" className="h-8 md:h-10" />
           </NavLink>
         </li>
 

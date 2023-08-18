@@ -97,7 +97,7 @@ function Login() {
   }, [success]);
 
   return (
-    <div className="flex flex-col items-center pt-5 mx-3 rounded-lg">
+    <div className="flex flex-col items-center pt-5 mx-3 rounded-lg md:pt-0">
       <p
         ref={errRef}
         className={errMsg ? "errMsg" : "offscreen"}
