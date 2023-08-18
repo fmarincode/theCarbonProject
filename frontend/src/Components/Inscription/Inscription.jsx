@@ -260,7 +260,7 @@ function Inscription() {
             <p
               className={`${
                 isTooltipVisiblePwd
-                  ? "visible backdrop-filter bg-[#f2eeb38c] backdrop-blur-xl rounded-xl text-sm absolute h-32 p-1 right-0 top-0 flex flex-col items-center justify-center"
+                  ? "visible backdrop-filter bg-[#f2eeb38c] backdrop-blur-xl rounded-xl text-sm absolute h-32 p-1 right-0 top-0 flex flex-col items-center justify-center md:w-56 md:h-44 md:top-48 md:right-[365px]"
                   : "hidden"
               }`}
             >
@@ -317,7 +317,7 @@ function Inscription() {
             <p
               className={`${
                 isTooltipVisiblePwd2
-                  ? "visible backdrop-filter bg-[#f2eeb38c] backdrop-blur-xl rounded-xl text-sm absolute h-32 p-2 right-0 top-0 flex items-center"
+                  ? "visible backdrop-filter bg-[#f2eeb38c] backdrop-blur-xl rounded-xl text-sm absolute h-32 p-2 right-0 top-0 flex items-center md:w-56 md:top-48 md:right-14"
                   : "hidden"
               }`}
             >
@@ -337,7 +337,10 @@ function Inscription() {
             required
           />
         </div>
-        <NavLink to="/login" className="hover:cursor-pointer text-center -mt-5">
+        <NavLink
+          to="/login"
+          className="hover:cursor-pointer text-center -mt-5 md:-mt-0 md:font-display"
+        >
           Déjà inscrit ? Clique ici pour te connecter
         </NavLink>
         <div className="w-full items-center flex justify-center mb-5">
