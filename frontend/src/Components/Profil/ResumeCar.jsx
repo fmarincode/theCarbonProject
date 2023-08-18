@@ -49,9 +49,9 @@ function ResumeFlight() {
           : "Le résumé des trajets"}
       </h2>
 
-      <div className="overflow-y-auto h-[48vh] flex flex-col items-center md:flex-row md:overflow-x-auto md:w-3/4 md:h-60 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-h-4 md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md">
+      <div className="overflow-y-auto h-[48vh] flex flex-col items-center md:flex-row md:overflow-x-auto md:w-3/4 md:h-60 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-h-4 md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:-mt-5">
         {!userId && departure.length < 1 ? (
-          <p className="font-display text-2xl text-center md:ml-[15vw]">
+          <p className="font-display text-2xl text-center md:ml-[12vw] md:-mt-10">
             Tu n'as pas encore de trajets sauvegardés !
           </p>
         ) : (
