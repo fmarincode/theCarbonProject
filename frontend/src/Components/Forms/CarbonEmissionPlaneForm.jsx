@@ -294,7 +294,7 @@ function CarbonEmissionPlaneForm() {
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
               <div className="relative">
-                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:-ml-[11.6vw] md:mt-[2.3vh]  md:no-scrollbar">
+                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[12.5vw] md:-ml-[14.6vw] md:mt-[3vh] md:no-scrollbar">
                   {cityNameSuggest.map((city, index) => (
                     <li
                       role="presentation"
@@ -311,7 +311,7 @@ function CarbonEmissionPlaneForm() {
             <div className="flex flex-col items-center w-60 mb-5 md:mr-3">
               <label
                 htmlFor="arrival-airport"
-                className="font-bold text-center font-display text-xl mb-2 mt-4 md:mt-0"
+                className="font-bold text-center font-display text-xl mb-2 "
               >
                 Aéroport d'arrivée{" "}
               </label>
@@ -324,7 +324,7 @@ function CarbonEmissionPlaneForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md mt-[21.1vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:ml-[11.6vw] md:mt-[18vh] md:no-scrollbar">
+              <ul className="bg-white overflow-y-auto rounded-md mt-[20.2vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[12.5vw] md:ml-[14.5vw] md:mt-[22.8vh] md:no-scrollbar">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"
@@ -341,7 +341,7 @@ function CarbonEmissionPlaneForm() {
             <div className="flex flex-col items-center w-60 md:mb-5">
               <label
                 htmlFor="numb-passengers"
-                className="font-bold text-center mb-2 font-display text-xl mt-4 md:mt-0"
+                className="font-bold text-center mb-2 font-display text-xl"
               >
                 Nombre de passagers
               </label>
@@ -355,7 +355,7 @@ function CarbonEmissionPlaneForm() {
               />
             </div>
           </form>
-          <div className="flex justify-around pt-10 md:pt-8 md:justify-center">
+          <div className="flex justify-around pt-[53px] md:pt-8 md:justify-center">
             <button
               type="button"
               className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"

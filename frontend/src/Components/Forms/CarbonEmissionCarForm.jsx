@@ -1,19 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Select from "react-select";
 import UserContext from "../../contexts/UserContext";
 import FormContext from "../../contexts/FormContext";
-
-const textInputStyle = {
-  width: "75%",
-  padding: "5px 10px",
-  border: "none",
-  borderBottom: "1px solid #645979",
-  outline: "none",
-  borderRadius: "5px",
-  fontSize: "1rem",
-  fontWeight: "bold",
-};
 
 function CarbonEmissionCarForm() {
   const { userId, firstname } = useContext(UserContext);
@@ -196,6 +186,8 @@ function CarbonEmissionCarForm() {
           .post(`${import.meta.env.VITE_BACKEND_URL}/cars`, {
             departure: formToFindDistance.from,
             arrival: formToFindDistance.to,
+            carBrand: brandCar,
+            carModel: modelCar,
             totalKgEmission: data.data.attributes.carbon_kg,
             kmDistance: distanceValue,
             user_iduser: userId,
@@ -233,11 +225,11 @@ function CarbonEmissionCarForm() {
         </h2>
       </div>
 
-      <form className="flex flex-col items-center pt-7 md:flex-row md:w-full md:mt-10">
-        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
+      <form className="flex flex-col items-center pt-10 md:flex-row md:w-full md:mt-10">
+        <div className="flex flex-col items-center w-60 mb-3 md:mr-10 md:mb-5">
           <label
             htmlFor="departure-airport"
-            className="font-bold  font-display text-center text-xl mt-2 mb-2 md:mt-0"
+            className="font-bold  font-display text-center text-xl mb-2"
           >
             Ville de départ
           </label>
@@ -251,7 +243,7 @@ function CarbonEmissionCarForm() {
           />
         </div>
 
-        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
+        <div className="flex flex-col items-center w-60 mb-3 md:mr-10 md:mb-5">
           <label
             htmlFor="arrival-airport"
             className="font-bold text-center font-display text-xl mt-2 mb-2 md:mt-0"
@@ -268,76 +260,108 @@ function CarbonEmissionCarForm() {
           />
         </div>
 
-        <div className="flex flex-col items-center w-60 mb-3 md:mr-10">
+        <div className="flex flex-col items-center w-60 mb-3 md:mb-5">
           <label
             htmlFor="brandCar"
-            className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
+            className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0 md:mr-10"
           >
             Marque de la voiture
           </label>
-          <select
-            id="brandCar"
-            className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%] "
-            onChange={(e) => setBrandCar(e.target.value)}
-          >
-            <option value="">Sélectionnez</option>
-            {suggestBrandCar
-              .slice()
-              .sort()
-              .map((brand, index) => (
-                <option key={index} value={brand} className="py-2">
-                  {brand}
-                </option>
-              ))}
-          </select>
+          <div className="relative h-10 w-48 md:mr-10">
+            <Select
+              id="brandCar"
+              className="w-full"
+              options={suggestBrandCar
+                .slice()
+                .sort()
+                .map((brand) => ({
+                  label: brand,
+                  value: brand,
+                }))}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: "6px",
+                colors: {
+                  ...theme.colors,
+                  primary25: "#6C8C26",
+                  primary: "#274001",
+                },
+              })}
+              onChange={(selectedOption) => setBrandCar(selectedOption.value)}
+              isSearchable={false}
+            />
+          </div>
         </div>
 
         {displayModelInput && (
-          <div className="flex flex-col items-center w-60 mb-3 ">
+          <div className="flex flex-col items-center w-60 md:mb-5">
             <label
               htmlFor="modelCar"
               className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
             >
               Modèle de la voiture
             </label>
-            <select
-              id="modelCar"
-              className="w-[75%] py-[5px] px-[10px] border-b-[1px] border-[#645979] outline-none rounded-md text-xl font-bold md:w-[100%] "
-              onChange={(e) => setModelCar(e.target.value)}
-            >
-              <option value="">Sélectionnez</option>
-              {suggestModel
-                .slice()
-                .sort((a, b) => a.name.localeCompare(b.name)) // .localeCompare() est utilisé pour effectuer une comparaison de chaînes de caractères basée sur les règles linguistiques spécifiques à une langue donnée, ce qui garantit un tri alphabétique correct et #nt de .sort() qui n'utilise que ASCII/Unicode par défaut.
-                .map((modelData, index) => (
-                  <option
-                    key={index}
-                    value={`${modelData.name}_${modelData.years[0]}`} // Utilisez la première année
-                    className="py-2 text-gray-800 hover:bg-blue-300 hover:text-white"
-                  >
-                    {modelData.name} ({modelData.years.join(", ")})
-                  </option>
-                ))}
-            </select>
+            <div className="relative w-48">
+              <Select
+                id="modelCar"
+                className="w-full"
+                options={suggestModel
+                  .slice()
+                  .sort((a, b) => a.name.localeCompare(b.name))
+                  .map((modelData) => ({
+                    label: `${modelData.name} (${modelData.years.join(", ")})`,
+                    value: `${modelData.name}_${modelData.years[0]}`,
+                  }))}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: "6px",
+                  colors: {
+                    ...theme.colors,
+                    primary25: "#6C8C26",
+                    primary: "#274001",
+                  },
+                })}
+                onChange={(selectedOption) => setModelCar(selectedOption.value)}
+              />
+            </div>
           </div>
         )}
       </form>
-      <div className="flex justify-around pt-10 md:pt-8 md:justify-center">
-        <button
-          type="button"
-          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
-          onClick={() => navigate("/")}
-        >
-          Retour
-        </button>
-        <button
-          type="button"
-          className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10"
-          onClick={handleClickCalcul}
-        >
-          Calculer
-        </button>
-      </div>
+      {displayModelInput ? (
+        <div className="flex justify-around pt-2 md:pt-[31px] md:justify-center">
+          <button
+            type="button"
+            className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
+            onClick={() => navigate("/")}
+          >
+            Retour
+          </button>
+          <button
+            type="button"
+            className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10"
+            onClick={handleClickCalcul}
+          >
+            Calculer
+          </button>
+        </div>
+      ) : (
+        <div className="flex justify-around pt-10 md:pt-[31px] md:justify-center">
+          <button
+            type="button"
+            className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
+            onClick={() => navigate("/")}
+          >
+            Retour
+          </button>
+          <button
+            type="button"
+            className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10"
+            onClick={handleClickCalcul}
+          >
+            Calculer
+          </button>
+        </div>
+      )}
     </div>
   );
 }
