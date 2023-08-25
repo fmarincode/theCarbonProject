@@ -294,7 +294,7 @@ function CarbonEmissionPlaneForm() {
 
             {userInputDepartureAirport !== "" && showSuggestDeparture && (
               <div className="relative">
-                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:-ml-[11.6vw] md:mt-[2.3vh]  md:no-scrollbar">
+                <ul className="bg-white overflow-y-auto rounded-md -ml-[23vw] w-[46vw] -mt-5 max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[12.5vw] md:-ml-[14.6vw] md:mt-[3vh] md:no-scrollbar">
                   {cityNameSuggest.map((city, index) => (
                     <li
                       role="presentation"
@@ -324,7 +324,7 @@ function CarbonEmissionPlaneForm() {
             </div>
 
             {userInputArrivalAirport !== "" && showSuggestArrival && (
-              <ul className="bg-white overflow-y-auto rounded-md mt-[20.2vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[10vw] md:ml-[11.6vw] md:mt-[18vh] md:no-scrollbar">
+              <ul className="bg-white overflow-y-auto rounded-md mt-[20.2vh] w-[46vw] max-h-40 grid gap-2 absolute z-10 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:w-[12.5vw] md:ml-[14.5vw] md:mt-[22.8vh] md:no-scrollbar">
                 {cityNameSuggest.map((city, index) => (
                   <li
                     role="presentation"

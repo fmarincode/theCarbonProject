@@ -7,10 +7,12 @@ class carManager extends AbstractManager {
 
   insert(car) {
     return this.database.query(
-      `insert into ${this.table} (departure, arrival, totalKgEmission, kmDistance, user_iduser) values (?, ?, ?, ?, ?)`,
+      `insert into ${this.table} (departure, arrival, carBrand, carModel, totalKgEmission, kmDistance, user_iduser) values (?, ?, ?, ?, ?, ?, ?)`,
       [
         car.departure,
         car.arrival,
+        car.carBrand,
+        car.carModel,
         car.totalKgEmission,
         car.kmDistance,
         car.user_iduser,

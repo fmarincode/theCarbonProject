@@ -53,9 +53,9 @@ function ResumeFlight() {
           : "Le résumé des trajets"}
       </h2>
 
-      <div className="overflow-y-auto h-[48vh] flex flex-col items-center md:flex-row md:overflow-x-auto md:w-3/4 md:h-60 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-h-4 md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md md:-mt-5">
+      <div className="overflow-y-auto h-[40vh] flex flex-col items-center md:relative md:bottom-10 md:flex-row md:overflow-x-auto md:w-3/4 md:h-60 md:scrollbar md:scrollbar-track-[#EEF279] md:scrollbar-h-4 md:scrollbar-thumb-[#274001] md:scrollbar-track-rounded-md ">
         {!userId && departure.length < 1 ? (
-          <p className="font-display text-2xl text-center md:ml-[12vw] md:-mt-10">
+          <p className="font-display text-2xl text-center md:ml-[12vw]">
             Tu n'as pas encore de trajets sauvegardés !
           </p>
         ) : (
@@ -81,7 +81,7 @@ function ResumeFlight() {
         )}
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center md:-mt-[33px]">
         <button
           type="button"
           onClick={navigateToHome}

@@ -72,6 +72,8 @@ CREATE TABLE IF NOT EXISTS `carbon_db`.`carJourney` (
   `idCarJourney` INT NOT NULL AUTO_INCREMENT,
   `departure` VARCHAR(100) NOT NULL,
   `arrival` VARCHAR(100) NOT NULL,
+  `carBrand` VARCHAR(100) NOT NULL,
+  `carModel` VARCHAR(100) NOT NULL,
   `totalKgEmission` INT NOT NULL,
   `kmDistance` INT NOT NULL,
   `user_iduser` INT NOT NULL,
@@ -84,17 +86,17 @@ CREATE TABLE IF NOT EXISTS `carbon_db`.`carJourney` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO carJourney (idCarJourney, departure, arrival, totalKgEmission, kmDistance, user_iduser) VALUES 
-(1, "paris", "madrid", 231, 1270, 1),
-(2, "paris", "lille", 54, 225, 1),
-(3, "paris", "lille", 54, 225, 2),
-(4, "paris", "madrid", 231, 1270, 3),
-(5, "paris", "madrid", 231, 1270, 2),
-(6, "madrid", "paris", 231, 1270, 1),
-(7, "madrid", "paris", 231, 1270, 1),
-(8, "madrid", "paris", 231, 1270, 1),
-(9, "madrid", "paris", 231, 1270, 1),
-(10, "madrid", "paris", 231, 1270, 1);
+INSERT INTO carJourney (idCarJourney, departure, arrival, carBrand, carModel, totalKgEmission, kmDistance, user_iduser) VALUES 
+(1, "paris", "madrid","Alfa Romeo", "164 (1995)", 231, 1270, 1),
+(2, "paris", "lille","Alfa Romeo", "164 (1995)", 54, 225, 1),
+(3, "paris", "lille","Alfa Romeo", "164 (1995)", 54, 225, 2),
+(4, "paris", "madrid","Alfa Romeo", "164 (1995)", 231, 1270, 3),
+(5, "paris", "madrid","Alfa Romeo", "164 (1995)", 231, 1270, 2),
+(6, "madrid", "paris","Alfa Romeo", "164 (1995)", 231, 1270, 1),
+(7, "madrid", "paris","Alfa Romeo", "164 (1995)", 231, 1270, 1),
+(8, "madrid", "paris","Alfa Romeo", "164 (1995)", 231, 1270, 1),
+(9, "madrid", "paris","Alfa Romeo", "164 (1995)", 231, 1270, 1),
+(10, "madrid", "paris","Alfa Romeo", "164 (1995)", 231, 1270, 1);
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

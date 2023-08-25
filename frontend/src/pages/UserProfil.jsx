@@ -10,7 +10,7 @@ function UserProfil() {
       <div className="h-[75vh] w-[100vw] bg-[#c4c589ba] flex flex-col mx-3 my-auto rounded-xl border-x border-b border-opacity-30 backdrop-filter backdrop-blur-sm md:min-w-[65vw] md:max-w-[50vw] md:max-h-[40vh]">
         {showComponent ? <ResumeCar /> : <ResumeFlight />}
 
-        <div className="flex w-full h-full justify-around items-end md:relative md:bottom-[45.5vh]">
+        <div className="flex w-full h-full justify-around items-end md:relative md:bottom-[44.2vh]">
           <div className="flex w-full h-16 justify-around items-center border-t-2 border-[#EEF279] rounded-xl bg-[#274001d8]">
             <button
               type="button"

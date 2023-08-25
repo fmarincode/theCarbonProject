@@ -186,6 +186,8 @@ function CarbonEmissionCarForm() {
           .post(`${import.meta.env.VITE_BACKEND_URL}/cars`, {
             departure: formToFindDistance.from,
             arrival: formToFindDistance.to,
+            carBrand: brandCar,
+            carModel: modelCar,
             totalKgEmission: data.data.attributes.carbon_kg,
             kmDistance: distanceValue,
             user_iduser: userId,
@@ -258,14 +260,14 @@ function CarbonEmissionCarForm() {
           />
         </div>
 
-        <div className="flex flex-col items-center w-60 mb-3 md:mr-10 md:mb-5">
+        <div className="flex flex-col items-center w-60 mb-3 md:mb-5">
           <label
             htmlFor="brandCar"
-            className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
+            className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0 md:mr-10"
           >
             Marque de la voiture
           </label>
-          <div className="relative h-10 w-48">
+          <div className="relative h-10 w-48 md:mr-10">
             <Select
               id="brandCar"
               className="w-full"
@@ -276,6 +278,15 @@ function CarbonEmissionCarForm() {
                   label: brand,
                   value: brand,
                 }))}
+              theme={(theme) => ({
+                ...theme,
+                borderRadius: "6px",
+                colors: {
+                  ...theme.colors,
+                  primary25: "#6C8C26",
+                  primary: "#274001",
+                },
+              })}
               onChange={(selectedOption) => setBrandCar(selectedOption.value)}
               isSearchable={false}
             />
@@ -283,7 +294,7 @@ function CarbonEmissionCarForm() {
         </div>
 
         {displayModelInput && (
-          <div className="flex flex-col items-center w-60">
+          <div className="flex flex-col items-center w-60 md:mb-5">
             <label
               htmlFor="modelCar"
               className="font-bold text-center mb-2 font-display text-xl mt-2 md:mt-0"
@@ -301,15 +312,23 @@ function CarbonEmissionCarForm() {
                     label: `${modelData.name} (${modelData.years.join(", ")})`,
                     value: `${modelData.name}_${modelData.years[0]}`,
                   }))}
+                theme={(theme) => ({
+                  ...theme,
+                  borderRadius: "6px",
+                  colors: {
+                    ...theme.colors,
+                    primary25: "#6C8C26",
+                    primary: "#274001",
+                  },
+                })}
                 onChange={(selectedOption) => setModelCar(selectedOption.value)}
-                isSearchable={false}
               />
             </div>
           </div>
         )}
       </form>
       {displayModelInput ? (
-        <div className="flex justify-around pt-2 md:pt-8 md:justify-center">
+        <div className="flex justify-around pt-2 md:pt-[31px] md:justify-center">
           <button
             type="button"
             className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
@@ -326,7 +345,7 @@ function CarbonEmissionCarForm() {
           </button>
         </div>
       ) : (
-        <div className="flex justify-around pt-10 md:pt-8 md:justify-center">
+        <div className="flex justify-around pt-10 md:pt-[31px] md:justify-center">
           <button
             type="button"
             className="rounded-full hover:text-white font-bold pt-3 pb-3 pl-6 pr-6 bg-[#274001d8] text-[#EEF279] w-28 md:w-32 md:mt-10 md:mr-10"
