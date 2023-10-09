@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function InscriptionPage() {
   const notifyRegistration = () =>
-    toast.success("🦄 Tu es bien inscrit et connecté !", {
+    toast.success("🌿 Tu es bien inscrit et connecté", {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -38,6 +38,9 @@ function InscriptionPage() {
         draggable
         pauseOnHover
         theme="colored"
+        toastStyle={{
+          backgroundImage: "linear-gradient(to right, #8AA626, #274001)",
+        }}
       />
       <div className="flex items-center justify-center h-screen">
         <div className="h-[75vh] w-[100vw] bg-[#c4c589ba] flex flex-col mx-3 rounded-xl border border-opacity-30 backdrop-filter backdrop-blur-sm md:min-w-[65vw] md:max-w-[50vw] md:max-h-[40vh]">

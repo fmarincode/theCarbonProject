@@ -212,7 +212,7 @@ function CarbonEmissionCarForm() {
       console.error(err);
     }
 
-    navigate("/profil");
+    navigate("/userprofil");
   };
 
   return (

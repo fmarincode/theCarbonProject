@@ -213,7 +213,7 @@ function CarbonEmissionPlaneForm() {
       {showResults ? (
         <div className="mx-3">
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl font-display mt-2 drop-shadow-lg md:-mt-6">
               {" "}
               Distance parcourue
             </h3>
@@ -222,7 +222,7 @@ function CarbonEmissionPlaneForm() {
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl  font-display mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl font-display mt-2 md:mt-2 drop-shadow-lg">
               {" "}
               Emission CO2 totale
             </h3>
@@ -231,7 +231,7 @@ function CarbonEmissionPlaneForm() {
             </h3>
           </div>
           <div className="flex justify-center flex-col items-center">
-            <h3 className="font-bold text-xl font-display mt-2 md:mt-8 drop-shadow-lg">
+            <h3 className="font-bold text-xl font-display mt-2 drop-shadow-lg md:mt-2">
               {" "}
               Emission CO2 individuelle
             </h3>
@@ -252,14 +252,14 @@ function CarbonEmissionPlaneForm() {
           <div className="flex justify-around">
             <button
               type="submit"
-              className="rounded-full hover:text-white font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:mr-10"
+              className="rounded-full hover:text-white font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:mr-10 "
               onClick={saveFlight}
             >
               Sauvegarder
             </button>
             <button
               type="submit"
-              className="rounded-full hover:text-white font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:ml-10"
+              className="rounded-full hover:text-white font-bold py-2 px-8 bg-[#6C8C26] w-40 mt-8 mb-3 md:ml-10 "
               onClick={calculAgain}
             >
               Calculer

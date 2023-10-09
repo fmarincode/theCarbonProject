@@ -1,6 +1,9 @@
+import withMT from "@material-tailwind/react/utils/withMT";
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{html,js,jsx}"],
+
+module.exports = withMT({
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -9,4 +12,4 @@ module.exports = {
     },
   },
   plugins: [require("tailwind-scrollbar")({ nocompatible: true })],
-};
+});

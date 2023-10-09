@@ -114,7 +114,7 @@ function Inscription() {
           formUserValues
         );
         setTimeout(() => {
-          navigate("/profil");
+          navigate("/userprofil");
         }, 2000);
       } catch (err) {
         console.error(err);
@@ -213,7 +213,7 @@ function Inscription() {
                 formInscription.email === ""
                   ? "text-black"
                   : validMail
-                  ? "text-lime-600"
+                  ? "text-green-900"
                   : "text-red-600 "
               }`}
             >
@@ -244,7 +244,7 @@ function Inscription() {
                 formInscription.pwd === ""
                   ? "text-black"
                   : validPwd
-                  ? "text-lime-600"
+                  ? "text-green-900"
                   : "text-red-600 "
               }`}
             >
@@ -301,7 +301,7 @@ function Inscription() {
                 matchPwd === ""
                   ? "text-black"
                   : validMatch
-                  ? "text-lime-600"
+                  ? "text-green-900"
                   : "text-red-600 "
               }`}
             >
